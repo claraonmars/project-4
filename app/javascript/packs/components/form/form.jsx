@@ -11,30 +11,30 @@ export default class Form extends React.Component{
     this.makeQuery= this.makeQuery.bind(this);
 }
 
-makeQuery(){
+    makeQuery(){
 
     var reactThis = this
 
-let newPost={
-    post:{
-    name:'hello world',
-    title:'that is something'}
-}
+    let newPost={
+        post:{
+        name:'hello world',
+        title:'that is something'}
+    }
 
-fetch('http://localhost:3000/savings',{
-    method: 'post',
-    body: JSON.stringify(newPost),
-    headers : {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-       }
-})
-.then(function(response){
-    return response.json()
-})
-.then(function(data){
-    console.log('post req', data);
-})
+    fetch('http://localhost:3000/savings',{
+        method: 'post',
+        body: JSON.stringify(newPost),
+        headers : {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           }
+    })
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+        console.log('post req', data);
+    })
 
 }
 

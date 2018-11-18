@@ -5,9 +5,9 @@ class HomeController < ApplicationController
   def ajax
     @user = User.all
       if current_user
-      render json: {user: @user, status: :ok}
+      render json: {user: @user, loggedin: :true}
       else
-      render json: {status: :ok, user: :not_logged}
+      render json: {loggedin: :false}
     end
   end
 

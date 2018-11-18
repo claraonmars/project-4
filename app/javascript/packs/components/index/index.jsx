@@ -6,38 +6,7 @@ export default class Index extends React.Component{
     this.state = {
         loggedin:false
     }
-    this.makeQuery= this.makeQuery.bind(this);
-
 }
-
-    makeQuery(){
-
-    var reactThis = this
-
-    let newPost={
-        post:{
-        name:'hello world',
-        title:'that is something'}
-    }
-
-    fetch('http://localhost:3000/savings',{
-        method: 'post',
-        body: JSON.stringify(newPost),
-        headers : {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-           }
-    })
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        console.log('post req', data);
-    })
-
-    }
-
-
 
     render(){
     return(<div>
