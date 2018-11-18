@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Currents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Balance</th>
+      <th>App</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @currents.each do |current| %>
+      <tr>
+        <td><%= current.amount %></td>
+        <td><%= current.balance %></td>
+        <td><%= current.app %></td>
+        <td><%= current.type %></td>
+        <td><%= link_to 'Show', current %></td>
+        <td><%= link_to 'Edit', edit_current_path(current) %></td>
+        <td><%= link_to 'Destroy', current, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Current', new_current_path %>

@@ -1,0 +1,37 @@
+<%= form_with(model: current, local: true) do |form| %>
+  <% if current.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(current.errors.count, "error") %> prohibited this current from being saved:</h2>
+
+      <ul>
+      <% current.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :balance %>
+    <%= form.text_field :balance %>
+  </div>
+
+  <div class="field">
+    <%= form.label :app %>
+    <%= form.check_box :app %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.text_field :type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

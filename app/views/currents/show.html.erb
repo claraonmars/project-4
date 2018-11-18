@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @current.amount %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @current.balance %>
+</p>
+
+<p>
+  <strong>App:</strong>
+  <%= @current.app %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @current.type %>
+</p>
+
+<%= link_to 'Edit', edit_current_path(@current) %> |
+<%= link_to 'Back', currents_path %>

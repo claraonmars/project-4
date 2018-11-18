@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Savings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Balance</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @savings.each do |saving| %>
+      <tr>
+        <td><%= saving.amount %></td>
+        <td><%= saving.balance %></td>
+        <td><%= saving.type %></td>
+        <td><%= link_to 'Show', saving %></td>
+        <td><%= link_to 'Edit', edit_saving_path(saving) %></td>
+        <td><%= link_to 'Destroy', saving, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= javascript_pack_tag 'hello_react' %>
+
+<%= link_to 'New Saving', new_saving_path %>
