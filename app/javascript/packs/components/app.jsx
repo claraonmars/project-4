@@ -2,6 +2,8 @@ import React from 'react'
 import Index from './index/index'
 import Form from './form/form'
 
+import {Switch, Route} from 'react-router-dom'
+
 
 export default class App extends React.Component{
     constructor(){
@@ -27,14 +29,14 @@ export default class App extends React.Component{
         console.log('post req', data);
         reactThis.setState({ loggedin: data.loggedin });
         console.log(reactThis.state.loggedin);
-
     })
 }
 
   render(){
 
     return(<div>
-            <Index />
+
+            <Index loggedin={this.state.loggedin}/>
           </div>);
   }
 }
