@@ -1,26 +1,50 @@
 import React from 'react'
+var request = require('request');
+
 
 export default class Form extends React.Component{
     constructor(){
     super();
     this.state={
-        current:{
-        sort: 'hello world',
-        user_id: 1
-                },
-        current_account: ''
+        current_account: '',
+        saving_account:''
 
     }
 
-    this.changeHandler = this.changeHandler.bind(this)
+    this.changeHandlerCurrent = this.changeHandlerCurrent.bind(this)
+    this.changeHandlerSaving = this.changeHandlerSaving.bind(this)
+
+    this.callotp = this.callotp.bind(this)
+
     this.addCurrentAcc = this.addCurrentAcc.bind(this)
     this.addDebitCard = this.addDebitCard.bind(this)
 }
 
-    changeHandler(event) {
+    changeHandlerCurrent(event) {
         this.setState({ current_account: event.target.value });
         console.log("change", event.target.value);
     }
+
+    changeHandlerSaving(event) {
+        this.setState({ saving_account: event.target.value });
+        console.log("change", event.target.value);
+    }
+
+    callotp(){
+        request.post('https://textbelt.com/text', {
+  form: {
+    phone: '+6593274988',
+    message: 'Hello world',
+    key: 'textbelt',
+  },
+}, function(err, httpResponse, body) {
+  if (err) {
+    console.error('Error:', err);
+    return;
+  }
+  console.log(JSON.parse(body));
+})
+}
 
     addCurrentAcc(){
     var reactThis = this
@@ -47,13 +71,13 @@ export default class Form extends React.Component{
             {
               "image": {
                 "source": {
-                  "imageUri": "https://www.google.com.sg/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjEhaqwrt_eAhVWXisKHUStA-IQjRx6BAgBEAU&url=http%3A%2F%2Fyelom.agdiffusion.com%2Fcredit-card-example%2F&psig=AOvVaw3-8pBS3UhUWgnJrcRvDXQt&ust=1542679229809529" //image URL
+                  "imageUri": "https://res.cloudinary.com/dsfjnc10g/image/upload/v1542595025/1529504445934.jpg" //image URL
                 }
               },
               "features": [
                 {
                   "type": "TEXT_DETECTION",
-                  "maxResults": 1
+                  "maxResults": 10
                 }
               ]
             }
@@ -75,15 +99,17 @@ export default class Form extends React.Component{
                 console.log('post req', data);
     })
 
-
-
 }
 
   render(){
     return(<div>
-            <input onChange={this.changeHandler} value={this.current_account}/>
-            <button onClick={this.addCurrentAcc}>submit</button>
+        <p>Add your Current Account details</p>
+            <input onChange={this.changeHandlerCurrent} value={this.current_account}/>
+        <p>Add your Saving Account details</p>
+            <input onChange={this.changeHandlerSaving} value={this.saving_account}/>
             <button onClick={this.addDebitCard}>debit</button>
+
+            <button onClick={this.callotp}>submit</button>
           </div>);
   }
 }
