@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_015818) do
+ActiveRecord::Schema.define(version: 2018_11_19_001342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.integer "date"
+    t.string "name"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
 
   create_table "currents", force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2
@@ -23,9 +30,8 @@ ActiveRecord::Schema.define(version: 2018_11_18_015818) do
     t.integer "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
     t.integer "merchant_id"
-    t.index ["user_id"], name: "index_currents_on_user_id"
+    t.integer "account_id"
   end
 
   create_table "merchants", force: :cascade do |t|
@@ -43,8 +49,7 @@ ActiveRecord::Schema.define(version: 2018_11_18_015818) do
     t.integer "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_savings_on_user_id"
+    t.integer "account_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,6 +67,5 @@ ActiveRecord::Schema.define(version: 2018_11_18_015818) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "currents", "users"
-  add_foreign_key "savings", "users"
+  add_foreign_key "accounts", "users"
 end

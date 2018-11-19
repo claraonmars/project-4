@@ -9,7 +9,8 @@ export default class App extends React.Component{
     constructor(){
     super();
     this.state = {
-        loggedin:false
+        loggedin:false,
+        id: 0
     }
 
 }
@@ -27,16 +28,19 @@ export default class App extends React.Component{
     })
     .then(function(data){
         console.log('post req', data);
-        reactThis.setState({ loggedin: data.loggedin });
-        console.log(reactThis.state.loggedin);
+        reactThis.setState({ loggedin: data.loggedin , id: data.user[0].id});
     })
 }
 
   render(){
 
     return(<div>
-
-            <Index loggedin={this.state.loggedin}/>
+             <Switch>
+                <Route exact path="/" render={(props) => <Index {...props} loggedin={this.state.loggedin}/>}/>
+                <Route path="/accounts/new" render={(props) => <Form {...props} user_id={this.state.id}/>}/>
+            </Switch>
           </div>);
   }
 }
+
+

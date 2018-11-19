@@ -1,5 +1,7 @@
 class CurrentsController < ApplicationController
   before_action :set_current, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
+
 
   # GET /currents
   # GET /currents.json
@@ -69,6 +71,6 @@ class CurrentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def current_params
-      params.require(:current).permit(:amount, :balance, :app, :type)
+      params.require(:current).permit(:amount, :balance, :sort, :date, :created_at, :updated_at, :user_id)
     end
 end

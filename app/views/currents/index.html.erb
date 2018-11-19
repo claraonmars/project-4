@@ -18,8 +18,7 @@
       <tr>
         <td><%= current.amount %></td>
         <td><%= current.balance %></td>
-        <td><%= current.app %></td>
-        <td><%= current.type %></td>
+        <td><%= current.sort %></td>
         <td><%= link_to 'Show', current %></td>
         <td><%= link_to 'Edit', edit_current_path(current) %></td>
         <td><%= link_to 'Destroy', current, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -29,5 +28,6 @@
 </table>
 
 <br>
+
 
 <%= link_to 'New Current', new_current_path %>
