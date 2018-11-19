@@ -23,3 +23,11 @@ Things you may want to cover:
 
 * ...
 # project-4
+
+Technologies used:
+Textbelt
+Google Cloud Vision API
+Devise
+React-rails Webpack
+
+

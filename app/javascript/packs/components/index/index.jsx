@@ -10,7 +10,7 @@ export default class Index extends React.Component{
         if (loggedin === 'true'){
             return(<div>
             <h1>Welcome back!</h1>
-            <a href="/currents/new"><button>Add new Current Account</button></a>
+            <a href="/accounts/new"><button>Start Saving!</button></a>
 
           </div>);
         }

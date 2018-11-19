@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types';
+
 import Index from './index/index'
 import Form from './form/form'
 
