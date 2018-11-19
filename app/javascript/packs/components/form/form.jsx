@@ -5,6 +5,7 @@ import './style.scss';
 
 var request = require('request');
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class Debit extends React.Component{
     render(){
@@ -32,35 +33,57 @@ class Debit extends React.Component{
         }
   }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 class Otp extends React.Component{
   render(){
     return(<div className={this.props.class}>
         <input onChange={this.props.getOtp} value={this.props.otpvalue}/>
-        <button onClick={this.props.callOtp}>Submit OTP</button>
+        <button onClick={this.props.otpSubmit}>Submit OTP</button>
           </div>);
         }
   }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class AddCurrent extends React.Component{
   render(){
     return(<div className={this.props.class}>
         <p>Add your Current Account details</p>
-            <input onChange={this.changeHandlerCurrent} value={this.current_account}/>
+            <select onChange={this.props.getCurrentBank} value={this.props.currentBank}>
+            <option>Choose a bank</option>
+            <option value='DBS/POSB'>DBS/POSB</option>
+            <option value='UOB'>UOB</option>
+            <option value='OCBC'>OCBC</option>
+            <option value='CITIBANK'>Citibank</option>
+            </select>
+            <br/>
+            Account number:
+            <input onChange={this.props.getCurrentNum} value={this.props.currentNum}/>
             <button onClick={this.props.addCurrentAcc}>submit</button>
           </div>);
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 class AddSavings extends React.Component{
   render(){
-    return(<div  className={this.props.class}>
-        <p>Add your Saving Account details</p>
-            <input onChange={this.changeHandlerSaving} value={this.saving_account}/>
-            <button onClick={this.callotp}>submit</button>
+    return(<div className={this.props.class}>
+        <p>Add your Current Account details</p>
+            <select>
+            <option value={this.props.savingBank}>{this.props.savingBank}</option>
+            </select>
+            <br/>
+            Account number:
+            <input onChange={this.props.getSavingNum} value={this.props.savingNum}/>
+            <button onClick={this.props.addSavingAcc}>submit</button>
           </div>);
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 class Form extends React.Component{
     constructor(){
@@ -73,14 +96,14 @@ class Form extends React.Component{
                 cv: 0,
                 account_id: 0
         },
-        otp: '',
+        otp: 0,
         otp_class: 'hidden',
         current_class: 'hidden',
         saving_class: 'hidden',
         account:{
-                name: '',
-                user_id: '',
-                bank: '',
+                name: 'default',
+                user_id: 0,
+                bank: 'default',
                 account_number: ''
         }
     }
@@ -88,6 +111,7 @@ class Form extends React.Component{
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //DEBIT CARD//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     this.getDebitName = this.getDebitName.bind(this)
     this.getDebitExpiry = this.getDebitExpiry.bind(this)
     this.getDebitNumber = this.getDebitNumber.bind(this)
@@ -96,17 +120,27 @@ class Form extends React.Component{
     this.debitSubmit = this.debitSubmit.bind(this)
 
     this.debitReadCard = this.debitReadCard.bind(this)
+
     this.getOtp = this.getOtp.bind(this)
+    this.otpSubmit = this.otpSubmit.bind(this)
 
 ////////////////////////////////////////////////////////////
 //ADD CURRENT ACCOUNT//
 ////////////////////////////////////////////////////////////
 
-    this.changeHandlerCurrent = this.changeHandlerCurrent.bind(this)
-    this.changeHandlerSaving = this.changeHandlerSaving.bind(this)
-
+    this.getCurrentBank = this.getCurrentBank.bind(this)
+    this.getCurrentNum = this.getCurrentNum.bind(this)
 
     this.addCurrentAcc = this.addCurrentAcc.bind(this)
+
+////////////////////////////////////////////////////////////
+//ADD SAVING ACCOUNT//
+////////////////////////////////////////////////////////////
+
+    this.getSavingBank = this.getSavingBank.bind(this)
+    this.getSavingNum = this.getSavingNum.bind(this)
+
+    this.addSavingAcc = this.addSavingAcc.bind(this)
 }
 
 
@@ -153,6 +187,35 @@ class Form extends React.Component{
 }
 
     ////////////////////////////////////////////////////////////
+    // Debit card on change handlers:
+    ////////////////////////////////////////////////////////////
+
+    getDebitName(event){
+        var card = this.state.card
+        card.name = event.target.value
+        this.setState({card: card})
+    }
+
+    getDebitExpiry(event){
+        var card = this.state.card
+        card.expiry = event.target.value
+        this.setState({card: card})
+    }
+
+    getDebitNumber(event){
+        var card = this.state.card
+        card.card_number = event.target.value
+        this.setState({card: card})
+    }
+
+    getDebitCv(event){
+        var card = this.state.card
+        card.cv = event.target.value
+        this.setState({card: card})
+    }
+
+
+    ////////////////////////////////////////////////////////////
     // RESOLVED            Submit debit card details
     ////////////////////////////////////////////////////////////
 
@@ -175,10 +238,11 @@ class Form extends React.Component{
 
     reactThis.setState({otp_class: 'normal'})
 
-
+    ////////////////////////////////////////////////////////////
     // UNRESOLVED: generate random otp            Call otp
+    ////////////////////////////////////////////////////////////
 
-    if (reactThis.state.otp === ''){
+    if (reactThis.state.otp === 0){
         request.post('https://textbelt.com/text', {
       form: {
         phone: '+6593274988',
@@ -197,52 +261,48 @@ class Form extends React.Component{
 }
 
     ////////////////////////////////////////////////////////////
-    // Debit card on change handlers:
-
-    getDebitName(event){
-    var card = this.state.card
-    card.name = event.target.value
-    this.setState({card: card})
-    }
-
-    getDebitExpiry(event){
-    var card = this.state.card
-    card.expiry = event.target.value
-    this.setState({card: card})
-    }
-
-    getDebitNumber(event){
-    var card = this.state.card
-    card.card_number = event.target.value
-    this.setState({card: card})
-    }
-
-    getDebitCv(event){
-    var card = this.state.card
-    card.cv = event.target.value
-    this.setState({card: card})
-    }
-
+    // Otp on change handlers:
     ////////////////////////////////////////////////////////////
 
     getOtp(){
-    this.setState({otp: event.target.value});
-    console.log('otp:', event.target.value)
-}
+        this.setState({otp: event.target.value});
+        console.log('otp:', event.target.value)
+    }
+
+    ////////////////////////////////////////////////////////////
+    // Submit Otp
+    ////////////////////////////////////////////////////////////
+
+    otpSubmit(){
+        this.setState({current_class: 'normal'})
+    }
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ADD CURRENT ACCOUNT//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    changeHandlerCurrent(event) {
-        this.setState({ current_account: event.target.value });
-        console.log("change", event.target.value);
+    ////////////////////////////////////////////////////////////
+    // Current account on change handlers:
+    ////////////////////////////////////////////////////////////
+
+    getCurrentBank(event) {
+        var account = this.state.account
+        account.bank = event.target.value
+        account.user_id = this.props.user_id
+        account.name = 'current'
+        this.setState({account: account})
     }
 
-    changeHandlerSaving(event) {
-        this.setState({ saving_account: event.target.value });
-        console.log("change", event.target.value);
+    getCurrentNum(event) {
+        var account = this.state.account
+        account.account_number = event.target.value
+        this.setState({account: account})
     }
+
+    ////////////////////////////////////////////////////////////
+    // Submit Current Account details
+    ////////////////////////////////////////////////////////////
 
     addCurrentAcc(){
     var reactThis = this
@@ -260,7 +320,58 @@ class Form extends React.Component{
     .then(function(data){
         console.log('post req', data);
     })
+
+    reactThis.setState({saving_class: 'normal', bank: 'default'})
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ADD SAVINGS ACCOUNT//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////
+    // Saving account on change handlers:
+    ////////////////////////////////////////////////////////////
+
+    getSavingBank(event) {
+        var account = this.state.account
+        account.bank = event.target.value
+        account.user_id = this.props.user_id
+        account.name = 'saving'
+        this.setState({account: account})
+    }
+
+    getSavingNum(event) {
+        var account = this.state.account
+        account.account_number = event.target.value
+        this.setState({account: account})
+    }
+
+    ////////////////////////////////////////////////////////////
+    // Submit Current Account details
+    ////////////////////////////////////////////////////////////
+
+    addSavingAcc(){
+    var reactThis = this
+    fetch('http://localhost:3000/accounts',{
+        method: 'post',
+        body: JSON.stringify(reactThis.state.account),
+        headers : {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           }
+    })
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+        console.log('post req', data);
+    })
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//RENDER//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   render(){
     return(<div>
@@ -274,14 +385,29 @@ class Form extends React.Component{
         debitNumberValue={this.state.card.number}
         debitExpiryValue={this.state.card.expiry}
         debitCvValue={this.state.card.cv}
-        class={this.state.class}/>
+        class={this.state.class} />
 
-        <Otp otpvalue={this.state.otp} getOtp={this.getOtp} callOtp={this.callOtp} class={this.state.otp_class}/>
+        <Otp otpvalue={this.state.otp} getOtp={this.getOtp} otpSubmit={this.otpSubmit} class={this.state.otp_class}/>
 
-        <AddCurrent class={this.state.current_class} addCurrentAcc={this.addCurrentAcc}/>
-        <AddSavings class={this.state.saving_class}/>
-          </div>);
+        <AddCurrent
+        class={this.state.current_class}
+        addCurrentAcc={this.addCurrentAcc}
+        getCurrentBank={this.getCurrentBank}
+        getCurrentNum={this.getCurrentNum}
+        currentBank={this.state.account.bank}
+        currentNum={this.state.account_number} />
+
+        <AddSavings
+        class={this.state.saving_class}
+        getSavingBank={this.getSavingBank}
+        getSavingNum={this.getSavingNum}
+        savingBank={this.state.account.bank}
+        savingNum={this.state.account_number} />
+
+        </div>);
   }
 }
+
+
 
 export default Form;
