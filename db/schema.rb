@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_043755) do
+ActiveRecord::Schema.define(version: 2018_11_20_060312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2018_11_19_043755) do
     t.datetime "updated_at", null: false
     t.integer "merchant_id"
     t.index ["account_id"], name: "index_currents_on_account_id"
+  end
+
+  create_table "investments", force: :cascade do |t|
+    t.boolean "rounding", default: false
+    t.boolean "recurring", default: false
+    t.integer "recurring_amount"
+    t.boolean "oneoff", default: true
+    t.bigint "account_id"
+    t.index ["account_id"], name: "index_investments_on_account_id"
   end
 
   create_table "merchants", force: :cascade do |t|

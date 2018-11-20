@@ -1,2 +1,2 @@
-json.extract! card, :name, :card_number, :expiry, :cv, :account_id
+json.extract! card, :name, :card_number, :expiry, :cv
 json.url card_url(card, format: :json)

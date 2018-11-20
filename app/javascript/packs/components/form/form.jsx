@@ -108,7 +108,8 @@ class Form extends React.Component{
                 bank: 'default',
                 account_number: ''
         },
-        redirect: false
+        redirect: false,
+        existing: false,
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -144,6 +145,33 @@ class Form extends React.Component{
 
     this.addSavingAcc = this.addSavingAcc.bind(this)
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//CHECK FOR EXISTING ACCOUNTS//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    componentDidMount(){
+        var reactThis = this
+
+        fetch('http://localhost:3000/investments',{
+            method: 'get',
+            headers : {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+               }
+        })
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(data){
+            console.log('post req', data);
+            for (var i = 0; i< data.accounts.length; i ++){
+                if (data.accounts[i].name === 'current' || data.accounts[i].name === 'saving'){
+                    reactThis.setState({existing: true})
+                }
+            }
+        })
+    }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -378,6 +406,7 @@ renderRedirect = () => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   render(){
+    if (this.state.existing === false){
     return(<div>
         {this.renderRedirect()}
 
@@ -415,6 +444,13 @@ renderRedirect = () => {
         savingNum={this.state.account_number} />
 
         </div>);
+    }
+    else{
+        return(<div>
+            Your current account details are:
+
+            </div>)
+    }
   }
 }
 

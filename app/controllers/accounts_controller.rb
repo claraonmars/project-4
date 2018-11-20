@@ -3,7 +3,14 @@ class AccountsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def invest
+    @accounts = Account.where(user_id: current_user.id)
+    @investments = Investment.where(account_id: @accounts.ids)
 
+    respond_to do |format|
+        format.html
+        format.json { render :json => {:accounts => @accounts,
+                                        :investments => @investments } }
+      end
   end
 
   # GET /accounts
@@ -34,6 +41,8 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       if @account.save
+         @investment = Investment.new(account_id: @account.id)
+         @investment.save
         format.html { redirect_to @account, notice: 'account was successfully created.' }
         format.json { render :show, status: :created, location: @account}
       else
@@ -77,4 +86,5 @@ class AccountsController < ApplicationController
     def account_params
       params.require(:account).permit(:name, :user_id, :bank, :account_number)
     end
+
 end
