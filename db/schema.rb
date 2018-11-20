@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_043755) do
     t.integer "card_number"
     t.string "expiry"
     t.integer "cv"
-    t.integer "account_id"
+    t.integer "user_id"
   end
 
   create_table "currents", force: :cascade do |t|
@@ -38,10 +38,11 @@ ActiveRecord::Schema.define(version: 2018_11_19_043755) do
     t.string "sort"
     t.string "operation"
     t.integer "date"
+    t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "merchant_id"
-    t.integer "account_id"
+    t.index ["account_id"], name: "index_currents_on_account_id"
   end
 
   create_table "merchants", force: :cascade do |t|
@@ -57,9 +58,10 @@ ActiveRecord::Schema.define(version: 2018_11_19_043755) do
     t.string "sort"
     t.string "operation"
     t.integer "date"
+    t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "account_id"
+    t.index ["account_id"], name: "index_savings_on_account_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -6,6 +6,7 @@ class CreateSavings < ActiveRecord::Migration[5.2]
       t.string :sort
       t.string :operation
       t.integer :date
+      t.references :account
 
       t.timestamps
     end

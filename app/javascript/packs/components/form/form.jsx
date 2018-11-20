@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+
 
 import './style.scss';
 
@@ -94,7 +96,7 @@ class Form extends React.Component{
                 card_number: 0,
                 expiry: 'default',
                 cv: 0,
-                account_id: 0
+                user_id: 0
         },
         otp: 0,
         otp_class: 'hidden',
@@ -105,7 +107,8 @@ class Form extends React.Component{
                 user_id: 0,
                 bank: 'default',
                 account_number: ''
-        }
+        },
+        redirect: false
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -137,7 +140,6 @@ class Form extends React.Component{
 //ADD SAVING ACCOUNT//
 ////////////////////////////////////////////////////////////
 
-    this.getSavingBank = this.getSavingBank.bind(this)
     this.getSavingNum = this.getSavingNum.bind(this)
 
     this.addSavingAcc = this.addSavingAcc.bind(this)
@@ -193,6 +195,7 @@ class Form extends React.Component{
     getDebitName(event){
         var card = this.state.card
         card.name = event.target.value
+        card.user_id = this.props.user_id
         this.setState({card: card})
     }
 
@@ -332,17 +335,11 @@ class Form extends React.Component{
     // Saving account on change handlers:
     ////////////////////////////////////////////////////////////
 
-    getSavingBank(event) {
-        var account = this.state.account
-        account.bank = event.target.value
-        account.user_id = this.props.user_id
-        account.name = 'saving'
-        this.setState({account: account})
-    }
-
     getSavingNum(event) {
         var account = this.state.account
         account.account_number = event.target.value
+        account.user_id = this.props.user_id
+        account.name = 'saving'
         this.setState({account: account})
     }
 
@@ -367,7 +364,14 @@ class Form extends React.Component{
         console.log('post req', data);
     })
 
+    this.setState({redirect: true})
 }
+
+renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/' />
+    }
+  }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //RENDER//
@@ -375,6 +379,8 @@ class Form extends React.Component{
 
   render(){
     return(<div>
+        {this.renderRedirect()}
+
         <Debit
         debitName={this.getDebitName}
         debitNumber={this.getDebitNumber}
@@ -387,7 +393,11 @@ class Form extends React.Component{
         debitCvValue={this.state.card.cv}
         class={this.state.class} />
 
-        <Otp otpvalue={this.state.otp} getOtp={this.getOtp} otpSubmit={this.otpSubmit} class={this.state.otp_class}/>
+        <Otp
+        otpvalue={this.state.otp}
+        getOtp={this.getOtp}
+        otpSubmit={this.otpSubmit}
+        class={this.state.otp_class} />
 
         <AddCurrent
         class={this.state.current_class}
@@ -399,7 +409,7 @@ class Form extends React.Component{
 
         <AddSavings
         class={this.state.saving_class}
-        getSavingBank={this.getSavingBank}
+        addSavingAcc={this.addSavingAcc}
         getSavingNum={this.getSavingNum}
         savingBank={this.state.account.bank}
         savingNum={this.state.account_number} />

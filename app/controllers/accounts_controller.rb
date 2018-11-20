@@ -2,6 +2,10 @@ class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token
 
+  def invest
+
+  end
+
   # GET /accounts
   # GET /accounts.json
   def index
@@ -11,6 +15,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
+
   end
 
   # GET /accounts/new
@@ -30,7 +35,7 @@ class AccountsController < ApplicationController
     respond_to do |format|
       if @account.save
         format.html { redirect_to @account, notice: 'account was successfully created.' }
-        format.json { render :show, status: :created, location: @account }
+        format.json { render :show, status: :created, location: @account}
       else
         format.html { render :new }
         format.json { render json: @account.errors, status: :unprocessable_entity }

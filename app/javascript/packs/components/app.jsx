@@ -3,16 +3,21 @@ import PropTypes from 'prop-types';
 
 import Index from './index/index'
 import Form from './form/form'
+import Trans from './trans/trans'
+import Invest from './invest/invest'
+
 
 import {Switch, Route} from 'react-router-dom'
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export default class App extends React.Component{
     constructor(){
     super();
     this.state = {
         loggedin:false,
-        id: 0
+        id: 0,
+        account_id: 0
     }
 
 }
@@ -30,7 +35,10 @@ export default class App extends React.Component{
     })
     .then(function(data){
         console.log('post req', data);
-        reactThis.setState({ loggedin: data.loggedin , id: data.user[0].id});
+        reactThis.setState({ loggedin: data.loggedin});
+            if(reactThis.state.loggedin === "true"){
+                reactThis.setState({id: data.user[0].id});
+            }
     })
 }
 
@@ -40,6 +48,8 @@ export default class App extends React.Component{
              <Switch>
                 <Route exact path="/" render={(props) => <Index {...props} loggedin={this.state.loggedin}/>}/>
                 <Route path="/accounts/new" render={(props) => <Form {...props} user_id={this.state.id}/>}/>
+                <Route path="/transactions" component={Trans}/>
+                <Route path="/investments" component={Invest}/>
             </Switch>
           </div>);
   }

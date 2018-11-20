@@ -6,12 +6,19 @@ class SavingsController < ApplicationController
   # GET /savings
   # GET /savings.json
   def index
-    @savings = Saving.all
+      @savings = Saving.where(account_id: params[:account_id] )
+
+      respond_to do |format|
+        format.html
+        format.json { render :json => @savings }
+    end
+
   end
 
   # GET /savings/1
   # GET /savings/1.json
   def show
+
   end
 
   # GET /savings/new
@@ -71,6 +78,6 @@ class SavingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def saving_params
-      params.require(:saving).permit(:amount, :balance, :type)
+      params.require(:saving).permit(:amount, :balance, :type, :id)
     end
 end

@@ -6,8 +6,13 @@ class CurrentsController < ApplicationController
   # GET /currents
   # GET /currents.json
   def index
-    @currents = Current.all
+    @currents = Current.where(account_id: params[:account_id] )
+
+      respond_to do |format|
+        format.html
+        format.json { render :json => @currents }
   end
+end
 
   # GET /currents/1
   # GET /currents/1.json
