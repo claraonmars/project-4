@@ -38,6 +38,9 @@ end
   # POST /currents
   # POST /currents.json
   def create
+
+
+
     @current = Current.new(current_params)
 
     respond_to do |format|
@@ -83,6 +86,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def current_params
-      params.require(:current).permit(:amount, :balance, :sort, :date, :created_at, :updated_at)
+      params.require(:current).permit(:amount, :balance, :sort, :operation, :date, :account_id, :created_at, :updated_at)
     end
 end

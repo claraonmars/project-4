@@ -406,7 +406,7 @@ renderRedirect = () => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   render(){
-    if (this.state.existing === false){
+    // if (this.state.existing === false){
     return(<div>
         {this.renderRedirect()}
 
@@ -444,13 +444,14 @@ renderRedirect = () => {
         savingNum={this.state.account_number} />
 
         </div>);
-    }
-    else{
-        return(<div>
-            Your current account details are:
+    // }
+    // else{
+    //     return(<div>
+    //         Your current account details are:
 
-            </div>)
-    }
+
+    //         </div>)
+    //}
   }
 }
 

@@ -1,6 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
+import ReactChartkick, { LineChart, PieChart } from 'react-chartkick'
+import Chart from 'chart.js'
+
+ReactChartkick.addAdapter(Chart)
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class Rounding extends React.Component{
@@ -47,6 +53,7 @@ class Invest extends React.Component{
     constructor(){
     super();
     this.state={
+        user_id: 0,
         rounding_class:'hidden',
         recurring_class:'hidden',
         oneoff_class:'hidden',
@@ -60,6 +67,10 @@ class Invest extends React.Component{
             saving:{
 
             }
+        },
+
+        data:{
+
         }
     }
 
@@ -91,6 +102,7 @@ class Invest extends React.Component{
 
     componentDidMount(){
         var reactThis = this
+        reactThis.setState({user_id: this.props.user_id})
 
         //view current account's current investment plans
         fetch('http://localhost:3000/investments',{
@@ -113,9 +125,6 @@ class Invest extends React.Component{
                             //set state of investments
                             reactThis.setState({investment: data.investments[j]})
 
-                            console.log(reactThis.state.transaction);
-
-
                                 //set state as last current account transaction
                                 fetch('http://localhost:3000/currents/'+ data.investments[j].id,{
                                     method: 'get',
@@ -128,14 +137,12 @@ class Invest extends React.Component{
                                     return response.json()
                                 })
                                 .then(function(data){
-                                    console.log(data)
 
                                     //set state of saving account_id
                                     var current = reactThis.state.transaction
                                     current.current = data
                                     reactThis.setState({transaction: current})
 
-                                    console.log('impt',reactThis.state.transaction)
                                 })
                         }
                     }
@@ -154,15 +161,84 @@ class Invest extends React.Component{
                                     return response.json()
                                 })
                                 .then(function(data){
-                                    console.log(data)
 
                                     //set state of saving account_id
                                     var current = reactThis.state.transaction
                                     current.saving = data
                                     reactThis.setState({transaction: current})
 
-                                    console.log('impt',reactThis.state.transaction)
                                 })
+
+
+                            // set state as all savings done through app
+                            fetch('http://localhost:3000/accounts/'+ data.accounts[i].id+'/savings',{
+                                    method: 'get',
+                                    headers : {
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/json'
+                                       }
+                                })
+                                .then(function(response){
+                                    return response.json()
+                                })
+                                .then(function(data){
+
+                                    //set state of saving account_id
+                                    // var current = reactThis.state.allSavings
+                                    // current = data
+                                    // reactThis.setState({allSavings: current})
+
+                                    var key = []
+                                    var value = []
+                                    var cat1amt = 0
+                                    var cat2amt = 0
+                                    var cat3amt = 0
+                                    var otheramt = 0
+                                    var result = {}
+
+
+                                    for (var i = 0; i < data.length; i++){
+
+                                        var newsplit = String(data[i].date)
+                                        newsplit = newsplit.split('');
+                                        newsplit = newsplit.slice(0, 4)
+                                        newsplit = newsplit.join('')
+
+                                        if (data[i].sort === 'CREDIT' && newsplit === '1811'){
+                                            if(data[i].operation === 'One Off Invest'){
+                                                cat1amt = cat1amt + parseFloat(data[i].amount)
+                                            }
+                                            else if(data[i].operation === 'Recurring'){
+                                                cat2amt = cat2amt + parseFloat(data[i].amount)
+                                            }
+                                            else if(data[i].operation === 'Rounding'){
+                                                cat3amt = cat3amt + parseFloat(data[i].amount)
+                                            }
+                                            else{
+                                                otheramt = otheramt + parseFloat(data[i].amount)
+                                            }
+                                        }
+                                    }
+
+                                    key.push('One Off Invest')
+                                    key.push('Recurring')
+                                    key.push('Rounding')
+                                    key.push('Others')
+
+                                    value.push(cat1amt)
+                                    value.push(cat2amt)
+                                    value.push(cat3amt)
+                                    value.push(otheramt)
+
+                                    key.forEach((key, i) => result[key] = value[i]);
+                                    console.log(result)
+
+                                    var current = reactThis.state.data
+                                    current = result
+                                    reactThis.setState({data: current})
+
+                                })
+
                 }
             }
         })
@@ -267,24 +343,36 @@ class Invest extends React.Component{
     setoneoff(){
         var reactThis = this
 
+        console.log('look at me',reactThis.state.transaction)
+
         //get balance
-        let newtransc = {
+        let newcurrenttransc = {
             current:{
                 amount: reactThis.state.investment.oneoff,
-                balance: parseInt(reactThis.state.transaction.current.balance - reactThis.state.investment.oneoff),
-                sort: 'One Off Invest',
-                operation: 'Debit',
+                balance: parseInt(reactThis.state.transaction.current.balance) - parseInt(reactThis.state.investment.oneoff),
+                sort: 'DEBIT',
+                operation: 'One Off Invest',
                 date: new Date(),
                 account_id: reactThis.state.transaction.current.account_id,
                 merchant_id: 0
             }
         }
 
-        console.log(newtransc);
+        let newsavingtransc = {
+            saving:{
+                amount: reactThis.state.investment.oneoff,
+                balance: parseInt(reactThis.state.transaction.saving.balance) + parseInt(reactThis.state.investment.oneoff),
+                sort: 'CREDIT',
+                operation: 'One Off Invest',
+                date: new Date(),
+                account_id: reactThis.state.transaction.saving.account_id
+            }
+        }
 
+        //make a new transaction to transfer $ from current ...
         fetch('http://localhost:3000/currents/',{
                 method: 'post',
-                body: JSON.stringify(newtransc),
+                body: JSON.stringify(newcurrenttransc),
                 headers : {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
@@ -294,7 +382,24 @@ class Invest extends React.Component{
                 return response.json()
             })
             .then(function(data){
-                console.log('new',newtransc);
+                console.log('current',newcurrenttransc);
+                console.log('data',data);
+        })
+
+        // ....to savings
+        fetch('http://localhost:3000/savings/',{
+                method: 'post',
+                body: JSON.stringify(newsavingtransc),
+                headers : {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                   }
+            })
+            .then(function(response){
+                return response.json()
+            })
+            .then(function(data){
+                console.log('saving', newsavingtransc);
                 console.log('data',data);
         })
 
@@ -328,6 +433,11 @@ class Invest extends React.Component{
                     getoneoff={this.getoneoff}
                     setoneoff={this.setoneoff}
                     oneoff={this.state.investment.oneoff}/>
+
+                    <br/>
+                    (Appname) helped you saved this month:
+                    <PieChart data={this.state.data} />
+
 
                     </div>)
     }

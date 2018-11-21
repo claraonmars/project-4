@@ -38,6 +38,8 @@ class SavingsController < ApplicationController
   # POST /savings
   # POST /savings.json
   def create
+
+
     @saving = Saving.new(saving_params)
 
     respond_to do |format|
@@ -83,6 +85,6 @@ class SavingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def saving_params
-      params.require(:saving).permit(:amount, :balance, :type, :id)
+      params.require(:saving).permit(:amount, :balance, :sort, :operation, :date, :created_at, :updated_at, :account_id)
     end
 end
