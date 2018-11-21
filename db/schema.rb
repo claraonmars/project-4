@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_060312) do
     t.boolean "rounding", default: false
     t.boolean "recurring", default: false
     t.integer "recurring_amount"
-    t.boolean "oneoff", default: true
+    t.integer "oneoff", default: 0
     t.bigint "account_id"
     t.index ["account_id"], name: "index_investments_on_account_id"
   end

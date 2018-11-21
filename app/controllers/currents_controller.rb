@@ -18,6 +18,7 @@ end
   # GET /currents/1.json
   def show
         @latestcurrent = Current.all.last
+
         respond_to do |format|
         format.html
         format.json { render :json => @latestcurrent }
@@ -82,6 +83,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def current_params
-      params.require(:current).permit(:amount, :balance, :sort, :date, :created_at, :updated_at, :user_id)
+      params.require(:current).permit(:amount, :balance, :sort, :date, :created_at, :updated_at)
     end
 end

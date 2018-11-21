@@ -35,8 +35,8 @@ class Oneoff extends React.Component{
         return(<div className={this.props.class}>
             Make a one off investment.
 
-            <input onChange={this.props.getOneoff} value={this.props.oneOff}/>
-            <button onClick={this.props.setOneoff}>Invest now!</button>
+            <input onChange={this.props.getoneoff} value={this.props.oneoff}/>
+            <button onClick={this.props.setoneoff}>Invest now!</button>
             </div>)
     }
 }
@@ -56,21 +56,9 @@ class Invest extends React.Component{
 
         transaction:{
             current:{
-                amount: 0,
-                balance: 0,
-                sort: 'default',
-                operation: 'default',
-                date: new Date(),
-                account_id: 0,
-                merchant_id: 0
             },
             saving:{
-                amount: 0,
-                balance: 0,
-                sort: 'default',
-                operation: 'default',
-                date: new Date(),
-                account_id: 0,
+
             }
         }
     }
@@ -81,7 +69,7 @@ class Invest extends React.Component{
 
     this.rounding = this.rounding.bind(this)
     this.recurring = this.recurring.bind(this)
-    this.oneOff = this.oneOff.bind(this)
+    this.oneoff = this.oneoff.bind(this)
 
 ////////////////////////////////////////////////////////////
 //ADD INVESTMENT TYPE//
@@ -92,8 +80,8 @@ class Invest extends React.Component{
     this.setRecurring = this.setRecurring.bind(this)
     this.getRecurring = this.getRecurring.bind(this)
 
-    this.setOneoff = this.setOneoff.bind(this)
-    this.getOneoff = this.getOneoff.bind(this)
+    this.setoneoff = this.setoneoff.bind(this)
+    this.getoneoff = this.getoneoff.bind(this)
 
 }
 
@@ -179,11 +167,6 @@ class Invest extends React.Component{
             }
         })
 
-
-
-
-        //view last saving account transaction
-
     }
 
 
@@ -199,7 +182,7 @@ class Invest extends React.Component{
         this.setState({rounding_class: 'hidden', recurring_class: 'normal', oneoff_class: 'hidden'})
     }
 
-    oneOff(){
+    oneoff(){
         this.setState({rounding_class: 'hidden', recurring_class: 'hidden', oneoff_class: 'normal'})
     }
 
@@ -269,22 +252,39 @@ class Invest extends React.Component{
 //ADD ONE OFF//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    getOneoff(event){
+    getoneoff(event){
         var investment = this.state.investment
-        investment.oneOff = parseInt(event.target.value)
+        investment.oneoff = parseInt(event.target.value)
         this.setState({investment: investment})
         console.log(event.target.value)
+        console.log(this.state.investment)
     }
 
 ////////////////////////////////////////////////////////////
 //UNRESOLVED:               MAKE AN IMMEDIATE TRANSACTION //
 ////////////////////////////////////////////////////////////
 
-    setOneoff(){
+    setoneoff(){
         var reactThis = this
+
+        //get balance
+        let newtransc = {
+            current:{
+                amount: reactThis.state.investment.oneoff,
+                balance: parseInt(reactThis.state.transaction.current.balance - reactThis.state.investment.oneoff),
+                sort: 'One Off Invest',
+                operation: 'Debit',
+                date: new Date(),
+                account_id: reactThis.state.transaction.current.account_id,
+                merchant_id: 0
+            }
+        }
+
+        console.log(newtransc);
+
         fetch('http://localhost:3000/currents/',{
                 method: 'post',
-                body: JSON.stringify(reactThis.state.transaction.current),
+                body: JSON.stringify(newtransc),
                 headers : {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
@@ -294,7 +294,8 @@ class Invest extends React.Component{
                 return response.json()
             })
             .then(function(data){
-                console.log('post req', data);
+                console.log('new',newtransc);
+                console.log('data',data);
         })
 
     }
@@ -310,7 +311,7 @@ class Invest extends React.Component{
                     How would you like to invest?<br/>
                     <button onClick={this.rounding}>Rounding</button>
                     <button onClick={this.recurring}>Recurring</button>
-                    <button onClick={this.oneOff}>One off</button>
+                    <button onClick={this.oneoff}>One off</button>
 
                     <Rounding
                     class={this.state.rounding_class}
@@ -324,9 +325,9 @@ class Invest extends React.Component{
 
                     <Oneoff
                     class={this.state.oneoff_class}
-                    getOneoff={this.getOneoff}
-                    setOneoff={this.setOneoff}
-                    oneOff={this.state.investment.oneOff}/>
+                    getoneoff={this.getoneoff}
+                    setoneoff={this.setoneoff}
+                    oneoff={this.state.investment.oneoff}/>
 
                     </div>)
     }
