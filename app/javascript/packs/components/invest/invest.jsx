@@ -104,7 +104,10 @@ class Invest extends React.Component{
         var reactThis = this
         reactThis.setState({user_id: this.props.user_id})
 
-        //view current account's current investment plans
+////////////////////////////////////////////////////////////
+//view current account's current investment plans //
+////////////////////////////////////////////////////////////
+
         fetch('http://localhost:3000/investments',{
             method: 'get',
             headers : {
@@ -147,9 +150,13 @@ class Invest extends React.Component{
                         }
                     }
                 }
+
+////////////////////////////////////////////////////////////
+//set state as last current account transaction //
+////////////////////////////////////////////////////////////
+
                 else if(data.accounts[i].name === 'saving'){
 
-                            //set state as last current account transaction
                             fetch('http://localhost:3000/savings/'+ data.accounts[i].id,{
                                     method: 'get',
                                     headers : {
@@ -169,8 +176,10 @@ class Invest extends React.Component{
 
                                 })
 
+////////////////////////////////////////////////////////////
+// set state as all savings done through app //
+////////////////////////////////////////////////////////////
 
-                            // set state as all savings done through app
                             fetch('http://localhost:3000/accounts/'+ data.accounts[i].id+'/savings',{
                                     method: 'get',
                                     headers : {
@@ -187,6 +196,10 @@ class Invest extends React.Component{
                                     // var current = reactThis.state.allSavings
                                     // current = data
                                     // reactThis.setState({allSavings: current})
+
+////////////////////////////////////////////////////////////
+//ADD OVERVIEW OF SAVINGS IN CHART //
+////////////////////////////////////////////////////////////
 
                                     var key = []
                                     var value = []
@@ -231,7 +244,6 @@ class Invest extends React.Component{
                                     value.push(otheramt)
 
                                     key.forEach((key, i) => result[key] = value[i]);
-                                    console.log(result)
 
                                     var current = reactThis.state.data
                                     current = result
