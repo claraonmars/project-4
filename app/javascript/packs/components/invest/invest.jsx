@@ -16,7 +16,6 @@ class Rounding extends React.Component{
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 class Recurring extends React.Component{
     render(){
         return(<div className={this.props.class}>
@@ -53,6 +52,26 @@ class Invest extends React.Component{
         oneoff_class:'hidden',
 
         investment:{
+        },
+
+        transaction:{
+            current:{
+                amount: 0,
+                balance: 0,
+                sort: 'default',
+                operation: 'default',
+                date: new Date(),
+                account_id: 0,
+                merchant_id: 0
+            },
+            saving:{
+                amount: 0,
+                balance: 0,
+                sort: 'default',
+                operation: 'default',
+                date: new Date(),
+                account_id: 0,
+            }
         }
     }
 
@@ -79,12 +98,13 @@ class Invest extends React.Component{
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//CHECK FOR EXISTING INVESTMENTS//
+//CHECK FOR EXISTING INVESTMENTS IN CURRENT ACCOUNT//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     componentDidMount(){
         var reactThis = this
 
+        //view current account's current investment plans
         fetch('http://localhost:3000/investments',{
             method: 'get',
             headers : {
@@ -96,18 +116,74 @@ class Invest extends React.Component{
             return response.json()
         })
         .then(function(data){
-            console.log('post req', data);
+
             for (var i = 0; i<data.accounts.length; i ++){
                 if (data.accounts[i].name === 'current'){
                     for (var j = 0; j< data.investments.length; j ++){
                         if (data.investments[j].account_id === data.accounts[i].id){
+
+                            //set state of investments
                             reactThis.setState({investment: data.investments[j]})
-                            console.log(reactThis.state.investment);
+
+                            console.log(reactThis.state.transaction);
+
+
+                                //set state as last current account transaction
+                                fetch('http://localhost:3000/currents/'+ data.investments[j].id,{
+                                    method: 'get',
+                                    headers : {
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/json'
+                                       }
+                                })
+                                .then(function(response){
+                                    return response.json()
+                                })
+                                .then(function(data){
+                                    console.log(data)
+
+                                    //set state of saving account_id
+                                    var current = reactThis.state.transaction
+                                    current.current = data
+                                    reactThis.setState({transaction: current})
+
+                                    console.log('impt',reactThis.state.transaction)
+                                })
                         }
                     }
                 }
+                else if(data.accounts[i].name === 'saving'){
+
+                            //set state as last current account transaction
+                            fetch('http://localhost:3000/savings/'+ data.accounts[i].id,{
+                                    method: 'get',
+                                    headers : {
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/json'
+                                       }
+                                })
+                                .then(function(response){
+                                    return response.json()
+                                })
+                                .then(function(data){
+                                    console.log(data)
+
+                                    //set state of saving account_id
+                                    var current = reactThis.state.transaction
+                                    current.saving = data
+                                    reactThis.setState({transaction: current})
+
+                                    console.log('impt',reactThis.state.transaction)
+                                })
+                }
             }
         })
+
+
+
+
+        //view last saving account transaction
+
     }
 
 
@@ -127,9 +203,9 @@ class Invest extends React.Component{
         this.setState({rounding_class: 'hidden', recurring_class: 'hidden', oneoff_class: 'normal'})
     }
 
-////////////////////////////////////////////////////////////
-//ADD ROUNDING //
-////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ADD ROUNDING//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     setRounding(){
         var reactThis = this
@@ -155,9 +231,9 @@ class Invest extends React.Component{
     })
 }
 
-////////////////////////////////////////////////////////////
-//ADD RECURRING //
-////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ADD RECURRING//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     getRecurring(event){
         var investment = this.state.investment
@@ -189,9 +265,9 @@ class Invest extends React.Component{
         })
 }
 
-////////////////////////////////////////////////////////////
-//ADD ONEOFF //
-////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ADD ONE OFF//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     getOneoff(event){
         var investment = this.state.investment
@@ -200,11 +276,15 @@ class Invest extends React.Component{
         console.log(event.target.value)
     }
 
+////////////////////////////////////////////////////////////
+//UNRESOLVED:               MAKE AN IMMEDIATE TRANSACTION //
+////////////////////////////////////////////////////////////
+
     setOneoff(){
         var reactThis = this
-        fetch('http://localhost:3000/investments/' + reactThis.state.investment.id,{
-                method: 'put',
-                body: JSON.stringify(reactThis.state.investment),
+        fetch('http://localhost:3000/currents/',{
+                method: 'post',
+                body: JSON.stringify(reactThis.state.transaction.current),
                 headers : {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'

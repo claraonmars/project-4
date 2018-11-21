@@ -71,7 +71,7 @@ class Trans extends React.Component{
     componentDidMount(){
     var reactThis = this
 
-    fetch('http://localhost:3000/accounts/1/savings',{
+    fetch('http://localhost:3000/accounts/2/savings',{
         method: 'get',
         headers : {
             'Content-Type': 'application/json',

@@ -18,6 +18,11 @@ class SavingsController < ApplicationController
   # GET /savings/1
   # GET /savings/1.json
   def show
+      @latestsavings = Saving.all.last
+    respond_to do |format|
+        format.html
+        format.json { render :json => @latestsavings }
+    end
 
   end
 
