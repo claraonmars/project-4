@@ -6,6 +6,8 @@ import Chart from 'chart.js'
 
 ReactChartkick.addAdapter(Chart)
 
+import { Button } from 'mdbreact'
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -14,7 +16,7 @@ class Rounding extends React.Component{
         return(<div className={this.props.class}>
             Rounding investments round up your purchases to the next dollar and invests the change in your savings account.
 
-            <button onClick={this.props.setRounding}>Implement Rounding!</button>
+            <Button size="sm" onClick={this.props.setRounding}>Implement Rounding!</Button>
 
             </div>)
     }
@@ -28,7 +30,7 @@ class Recurring extends React.Component{
             Recurring investments add the set amount to your savings account every month.
 
             <input onChange={this.props.getRecurring} value={this.props.recurring_amt}/>
-            <button onClick={this.props.setRecurring}>Recurr Monthly!</button>
+            <Button size="sm" onClick={this.props.setRecurring}>Recurr Monthly!</Button>
             </div>)
     }
 }
@@ -42,7 +44,7 @@ class Oneoff extends React.Component{
             Make a one off investment.
 
             <input onChange={this.props.getoneoff} value={this.props.oneoff}/>
-            <button onClick={this.props.setoneoff}>Invest now!</button>
+            <Button size="sm" onClick={this.props.setoneoff}>Invest now!</Button>
             </div>)
     }
 }
@@ -425,10 +427,11 @@ class Invest extends React.Component{
         render(){
 
                 return(<div>
+                    <h1>Investments</h1>
                     How would you like to invest?<br/>
-                    <button onClick={this.rounding}>Rounding</button>
-                    <button onClick={this.recurring}>Recurring</button>
-                    <button onClick={this.oneoff}>One off</button>
+                    <Button rounded outline onClick={this.rounding}>Rounding</Button>
+                    <Button rounded outline onClick={this.recurring}>Recurring</Button>
+                    <Button rounded outline onClick={this.oneoff}>One off</Button>
 
                     <Rounding
                     class={this.state.rounding_class}

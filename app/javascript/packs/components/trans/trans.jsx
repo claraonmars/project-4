@@ -1,5 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import { Pagination, PageItem, PageLink } from "mdbreact";
+import { ListGroup, ListGroupItem } from 'mdbreact'
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //onClick={() => this.props.display(item)}
@@ -12,15 +16,14 @@ class Current extends React.Component{
         console.log('number',this.props.indexOfFirstTodo)
 
         const renderTodos = currentTodos.map((trans, i) => {
-            return <li key={i} >
-                {trans.id} |
+            return <ListGroupItem key={i} >
                 ${trans.amount} |
                 ${trans.balance} |
                 {trans.sort} |
                 {trans.operation} |
                 {trans.merchant_id} |
                 {trans.date}
-                </li>;
+                </ListGroupItem>;
         });
 
         const pageNumbers = [];
@@ -30,12 +33,13 @@ class Current extends React.Component{
 
         const renderPageNumbers = pageNumbers.map(number => {
           return (
-            <span
+            <PageItem className="page-link"
               key={number}
               id={number}
               onClick={this.props.changePage}>
-              {number} |
-            </span>
+              <PageLink className="page-link">{number}</PageLink>
+            </PageItem>
+
           );
         });
 
@@ -44,12 +48,16 @@ class Current extends React.Component{
             You are currently viewing your CURRENT ACCOUNT TRANSACTIONS <br/>
             <button onClick={this.props.switch}>View SAVINGS ACCOUNT TRANSACTIONS</button>
 
-            <ul>
+            <ListGroup>
+            <ListGroupItem></ListGroupItem>
             {renderTodos}
-            </ul>
-            <ul id="page-numbers">
+            </ListGroup>
+
+            <Pagination className="pagination-sm">
+
               {renderPageNumbers}
-            </ul>
+
+            </Pagination>
             </div>)
     }
 }
@@ -63,14 +71,13 @@ class Saving extends React.Component{
         console.log('number',this.props.indexOfFirstTodo)
 
         const renderTodos = currentTodos.map((trans, i) => {
-            return <li key={i} >
-                {trans.id} |
+            return <ListGroupItem key={i} >
                 ${trans.amount} |
                 ${trans.balance} |
                 {trans.sort} |
                 {trans.operation} |
                 {trans.date}
-                </li>;
+                </ListGroupItem>;
         });
 
         const pageNumbers = [];
@@ -80,12 +87,12 @@ class Saving extends React.Component{
 
         const renderPageNumbers = pageNumbers.map(number => {
           return (
-            <span
+             <PageItem className="page-link"
               key={number}
               id={number}
               onClick={this.props.changePage}>
-              {number} |
-            </span>
+              <PageLink className="page-link">{number}</PageLink>
+            </PageItem>
           );
         });
 
@@ -93,12 +100,16 @@ class Saving extends React.Component{
             You are currently viewing your SAVING ACCOUNT TRANSACTIONS <br/>
             <button onClick={this.props.switch}>View CURRENT ACCOUNT TRANSACTIONS</button>
 
-           <ul>
+           <ListGroup>
+            <ListGroupItem></ListGroupItem>
             {renderTodos}
-            </ul>
-            <ul id="page-numbers">
+            </ListGroup>
+
+            <Pagination className="pagination-sm">
+
               {renderPageNumbers}
-            </ul>
+
+            </Pagination>
             </div>)
     }
 }
@@ -115,7 +126,7 @@ class Trans extends React.Component{
         saving_trans: [],
 
         currentPage: 1,
-        transPerPage: 20,
+        transPerPage: 30,
     }
 
     this.switchToSaving = this.switchToSaving.bind(this)
@@ -183,6 +194,8 @@ class Trans extends React.Component{
 
         return(
             <div>
+            <h1>Transactions</h1>
+
                 <Current
                 class={this.state.current_class}
                 trans={this.state.current_trans}

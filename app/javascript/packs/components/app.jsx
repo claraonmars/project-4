@@ -49,13 +49,15 @@ export default class App extends React.Component{
   render(){
 
     return(<div>
-                <Nav/>
+            <Nav/>
+            <div className="container">
              <Switch>
                 <Route exact path="/" render={(props) => <Index {...props} loggedin={this.state.loggedin} user_id={this.state.id}/>}/>
                 <Route path="/accounts/new" render={(props) => <Form {...props} user_id={this.state.id}/>}/>
                 <Route path="/transactions" component={Trans}/>
                 <Route path="/investments" render={(props) => <Invest {...props} user_id={this.state.id}/>}/>
             </Switch>
+            </div>
           </div>);
   }
 }

@@ -22,9 +22,9 @@ constructor(){
   render() {
     return (
 
-      <Navbar color="indigo" dark expand="md">
+      <Navbar color="black" dark expand="md">
           <NavbarBrand>
-            <a href='/'><strong className="white-text">Navbar</strong></a>
+            <a href='/'><strong className="white-text">Save More</strong></a>
           </NavbarBrand>
           <NavbarToggler
             onClick={this.toggleCollapse}
