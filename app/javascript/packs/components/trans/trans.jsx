@@ -6,12 +6,13 @@ import PropTypes from 'prop-types';
 
 class Current extends React.Component{
     render(){
-        return(<div className={this.props.class}>
-            You are currently viewing your CURRENT ACCOUNT TRANSACTIONS <br/>
-            <button onClick={this.props.switch}>View SAVINGS ACCOUNT TRANSACTIONS</button>
 
-            {this.props.trans.map((trans, i) => (
-                <li key={i} >
+        const currentTodos = this.props.trans.reverse().slice(this.props.indexOfFirstTodo, this.props.indexOfLastTodo);
+
+        console.log('number',this.props.indexOfFirstTodo)
+
+        const renderTodos = currentTodos.map((trans, i) => {
+            return <li key={i} >
                 {trans.id} |
                 ${trans.amount} |
                 ${trans.balance} |
@@ -19,8 +20,36 @@ class Current extends React.Component{
                 {trans.operation} |
                 {trans.merchant_id} |
                 {trans.date}
-                </li>
-            ))}
+                </li>;
+        });
+
+        const pageNumbers = [];
+            for (let i = 1; i <= Math.ceil(this.props.trans.length / this.props.transPerPage); i++) {
+              pageNumbers.push(i);
+        }
+
+        const renderPageNumbers = pageNumbers.map(number => {
+          return (
+            <span
+              key={number}
+              id={number}
+              onClick={this.props.changePage}>
+              {number} |
+            </span>
+          );
+        });
+
+
+        return(<div className={this.props.class}>
+            You are currently viewing your CURRENT ACCOUNT TRANSACTIONS <br/>
+            <button onClick={this.props.switch}>View SAVINGS ACCOUNT TRANSACTIONS</button>
+
+            <ul>
+            {renderTodos}
+            </ul>
+            <ul id="page-numbers">
+              {renderPageNumbers}
+            </ul>
             </div>)
     }
 }
@@ -29,21 +58,47 @@ class Current extends React.Component{
 
 class Saving extends React.Component{
     render(){
-        return(<div className={this.props.class}>
-            You are currently viewing your SAVING ACCOUNT TRANSACTIONS <br/>
-            <button onClick={this.props.switch}>View CURRENT ACCOUNT TRANSACTIONS</button>
+        const currentTodos = this.props.trans.reverse().slice(this.props.indexOfFirstTodo, this.props.indexOfLastTodo);
 
-            {this.props.trans.map((trans, i) => (
-                <li key={i} >
+        console.log('number',this.props.indexOfFirstTodo)
+
+        const renderTodos = currentTodos.map((trans, i) => {
+            return <li key={i} >
                 {trans.id} |
                 ${trans.amount} |
                 ${trans.balance} |
                 {trans.sort} |
                 {trans.operation} |
-                {trans.merchant_id} |
                 {trans.date}
-                </li>
-            ))}
+                </li>;
+        });
+
+        const pageNumbers = [];
+            for (let i = 1; i <= Math.ceil(this.props.trans.length / this.props.transPerPage); i++) {
+              pageNumbers.push(i);
+        }
+
+        const renderPageNumbers = pageNumbers.map(number => {
+          return (
+            <span
+              key={number}
+              id={number}
+              onClick={this.props.changePage}>
+              {number} |
+            </span>
+          );
+        });
+
+        return(<div className={this.props.class}>
+            You are currently viewing your SAVING ACCOUNT TRANSACTIONS <br/>
+            <button onClick={this.props.switch}>View CURRENT ACCOUNT TRANSACTIONS</button>
+
+           <ul>
+            {renderTodos}
+            </ul>
+            <ul id="page-numbers">
+              {renderPageNumbers}
+            </ul>
             </div>)
     }
 }
@@ -57,11 +112,15 @@ class Trans extends React.Component{
         saving_class: 'hidden',
         current_class: 'normal',
         current_trans: [],
-        saving_trans: []
+        saving_trans: [],
+
+        currentPage: 1,
+        transPerPage: 20,
     }
 
     this.switchToSaving = this.switchToSaving.bind(this)
     this.switchToCurrent = this.switchToCurrent.bind(this)
+    this.changePage = this.changePage.bind(this)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -110,15 +169,40 @@ class Trans extends React.Component{
         this.setState({current_class:'normal', saving_class:'hidden'})
     }
 
+    changePage(event) {
+    this.setState({currentPage: Number(event.target.id)});
+  }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //RENDER//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     render(){
+        const indexOfLastTodo = this.state.currentPage * this.state.transPerPage;
+        const indexOfFirstTodo = indexOfLastTodo - this.state.transPerPage;
+
         return(
             <div>
-                <Current class={this.state.current_class} trans={this.state.current_trans} switch={this.switchToSaving}/>
-                <Saving class={this.state.saving_class} trans={this.state.saving_trans} switch={this.switchToCurrent}/>
+                <Current
+                class={this.state.current_class}
+                trans={this.state.current_trans}
+                switch={this.switchToSaving}
+                currentpage={this.state.currentpage}
+                transPerPage={this.state.transPerPage}
+                changePage={this.changePage}
+                indexOfLastTodo={indexOfLastTodo}
+                indexOfFirstTodo={indexOfFirstTodo}/>
+
+
+                <Saving
+                class={this.state.saving_class}
+                trans={this.state.saving_trans}
+                switch={this.switchToCurrent}
+                currentpage={this.state.currentpage}
+                transPerPage={this.state.transPerPage}
+                changePage={this.changePage}
+                indexOfLastTodo={indexOfLastTodo}
+                indexOfFirstTodo={indexOfFirstTodo}/>
             </div>);
         }
 }

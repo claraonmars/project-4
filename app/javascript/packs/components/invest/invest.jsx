@@ -151,9 +151,9 @@ class Invest extends React.Component{
                     }
                 }
 
-////////////////////////////////////////////////////////////
-//set state as last current account transaction //
-////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////
+                //set state as last current account transaction //
+                ////////////////////////////////////////////////////////////
 
                 else if(data.accounts[i].name === 'saving'){
 
@@ -176,9 +176,9 @@ class Invest extends React.Component{
 
                                 })
 
-////////////////////////////////////////////////////////////
-// set state as all savings done through app //
-////////////////////////////////////////////////////////////
+                            ////////////////////////////////////////////////////////////
+                            // set state as all savings done through app //
+                            ////////////////////////////////////////////////////////////
 
                             fetch('http://localhost:3000/accounts/'+ data.accounts[i].id+'/savings',{
                                     method: 'get',
@@ -197,9 +197,9 @@ class Invest extends React.Component{
                                     // current = data
                                     // reactThis.setState({allSavings: current})
 
-////////////////////////////////////////////////////////////
-//ADD OVERVIEW OF SAVINGS IN CHART //
-////////////////////////////////////////////////////////////
+                                    ////////////////////////////////////////////////////////////
+                                    //ADD OVERVIEW OF SAVINGS IN CHART //
+                                    ////////////////////////////////////////////////////////////
 
                                     var key = []
                                     var value = []

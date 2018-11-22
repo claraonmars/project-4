@@ -5,6 +5,7 @@ import Index from './index/index'
 import Form from './form/form'
 import Trans from './trans/trans'
 import Invest from './invest/invest'
+import Nav from './nav/nav'
 
 
 import {Switch, Route} from 'react-router-dom'
@@ -16,8 +17,9 @@ export default class App extends React.Component{
     super();
     this.state = {
         loggedin:false,
-        id: 0,
-        account_id: 0
+        id: '',
+        account_id: 0,
+        user: {},
     }
 
 }
@@ -35,9 +37,11 @@ export default class App extends React.Component{
     })
     .then(function(data){
         console.log('post req', data);
+        console.log(reactThis.state.id)
         reactThis.setState({ loggedin: data.loggedin});
             if(reactThis.state.loggedin === "true"){
                 reactThis.setState({id: data.user[0].id});
+                console.log('whats this',reactThis.state.id)
             }
     })
 }
@@ -45,8 +49,9 @@ export default class App extends React.Component{
   render(){
 
     return(<div>
+                <Nav/>
              <Switch>
-                <Route exact path="/" render={(props) => <Index {...props} loggedin={this.state.loggedin}/>}/>
+                <Route exact path="/" render={(props) => <Index {...props} loggedin={this.state.loggedin} user_id={this.state.id}/>}/>
                 <Route path="/accounts/new" render={(props) => <Form {...props} user_id={this.state.id}/>}/>
                 <Route path="/transactions" component={Trans}/>
                 <Route path="/investments" render={(props) => <Invest {...props} user_id={this.state.id}/>}/>
