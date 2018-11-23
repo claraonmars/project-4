@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import { Pagination, PageItem, PageLink } from "mdbreact";
-import { ListGroup, ListGroupItem } from 'mdbreact'
+import { ListGroup, ListGroupItem, Button } from 'mdbreact'
 
 
 
@@ -17,12 +17,29 @@ class Current extends React.Component{
 
         const renderTodos = currentTodos.map((trans, i) => {
             return <ListGroupItem key={i} >
-                ${trans.amount} |
-                ${trans.balance} |
-                {trans.sort} |
-                {trans.operation} |
-                {trans.merchant_id} |
-                {trans.date}
+
+            {trans.date}
+
+            <div className="row">
+                <div className="col-8">
+                    {trans.operation}
+                </div>
+                <div className="col-4">
+                    ${trans.amount}
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-4">
+                {trans.sort}
+                </div>
+                <div className="col-4">
+                {trans.merchant_id}
+                </div>
+                <div className="col-4">
+                ${trans.balance}
+                </div>
+            </div>
                 </ListGroupItem>;
         });
 
@@ -46,7 +63,7 @@ class Current extends React.Component{
 
         return(<div className={this.props.class}>
             You are currently viewing your CURRENT ACCOUNT TRANSACTIONS <br/>
-            <button onClick={this.props.switch}>View SAVINGS ACCOUNT TRANSACTIONS</button>
+            <Button size="sm" onClick={this.props.switch}>View SAVINGS ACCOUNT TRANSACTIONS</Button>
 
             <ListGroup>
             <ListGroupItem></ListGroupItem>
@@ -72,11 +89,28 @@ class Saving extends React.Component{
 
         const renderTodos = currentTodos.map((trans, i) => {
             return <ListGroupItem key={i} >
-                ${trans.amount} |
-                ${trans.balance} |
-                {trans.sort} |
-                {trans.operation} |
                 {trans.date}
+
+            <div className="row">
+                <div className="col-8">
+                    {trans.operation}
+                </div>
+                <div className="col-4">
+                    ${trans.amount}
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-4">
+                {trans.sort}
+                </div>
+                <div className="col-4">
+                {trans.merchant_id}
+                </div>
+                <div className="col-4">
+                ${trans.balance}
+                </div>
+            </div>
                 </ListGroupItem>;
         });
 
@@ -98,7 +132,7 @@ class Saving extends React.Component{
 
         return(<div className={this.props.class}>
             You are currently viewing your SAVING ACCOUNT TRANSACTIONS <br/>
-            <button onClick={this.props.switch}>View CURRENT ACCOUNT TRANSACTIONS</button>
+            <Button size="sm"onClick={this.props.switch}>View CURRENT ACCOUNT TRANSACTIONS</Button>
 
            <ListGroup>
             <ListGroupItem></ListGroupItem>

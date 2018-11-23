@@ -4,39 +4,41 @@ import ReactChartkick, { LineChart, PieChart } from 'react-chartkick'
 import Chart from 'chart.js'
 
 ReactChartkick.addAdapter(Chart)
+import { Button } from 'mdbreact'
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class Body extends React.Component{
-    constructor(){
-        super();
-        this.state={
-            newdata: '',
-        }
-    }
+    // constructor(){
+    //     super();
+    //     this.state={
+    //         newdata: '',
+    //     }
+    // }
 
-    componentWillReceiveProps(nextProps){
-        var reactThis = this
-        console.log(nextProps)
-        if(Array.isArray(nextProps.data)){
-            console.log('huh',JSON.stringify(nextProps.data))
-            reactThis.setState({newdata: nextProps.data.toString()})
-        }
-    }
+    // componentWillReceiveProps(nextProps){
+    //     var reactThis = this
+    //     console.log(nextProps)
+    //     if(Array.isArray(nextProps.data)){
+    //         console.log('huh',JSON.stringify(nextProps.data))
+    //         reactThis.setState({newdata: nextProps.data.toString()})
+    //     }
+    // }
 
     render(){
         if (this.props.account === false){
         return(<div>
-            <a href="/accounts/new"><button>Start Saving!</button></a>
+            <a href="/accounts/new"><Button size="sm">Start Saving!</Button></a>
             </div>)
         }
         else{
         return(<div>
-            <a href="/investments">Start Investing!</a>
+            <Button size="sm"><a href="/investments">Start Investing!</a></Button>
             <br/>
 
             Accounts overview: (past 3 months):<br/>
-            <LineChart data={this.state.newdata} />
+            <LineChart data={this.props.data} />
 
 
             </div>)
@@ -53,7 +55,7 @@ export default class Index extends React.Component{
     this.state={
         investment:false,
         accounts: false,
-        data: '',
+        data: [],
         user_id: 0,
     }
 }
@@ -160,19 +162,19 @@ export default class Index extends React.Component{
 
                                                 key.forEach((key, i) => result[key] = value[i])
 
-                                                // var current = reactThis.state.data
-                                                // current = result
-                                                // reactThis.setState({data: current})
+                                                var current = reactThis.state.data
+                                                current = result
+                                                reactThis.setState({data: current})
 
-                                                var set1={
-                                                    "name":"current",
-                                                    "data": result
-                                                }
+                                                // var set1={
+                                                //     "name":"current",
+                                                //     "data": result
+                                                // }
 
                                                 // let dataA = [...reactThis.state.dataset];
                                                 // dataA.push(set1);
 
-                                                datasetarr.push(set1)
+                                                // datasetarr.push(set1)
 
                                             })
 
@@ -245,25 +247,25 @@ export default class Index extends React.Component{
 
                                                 // var current = reactThis.state.data
                                                 // current = result
-                                                // reactThis.setState({data1: current})
+                                                // reactThis.setState({data: current})
 
-                                                var set2={
-                                                    "name":"saving",
-                                                    "data": result
-                                                }
+                                                // var set2={
+                                                //     "name":"saving",
+                                                //     "data": result
+                                                // }
 
                                                 // let arr = [...reactThis.state.dataset]
                                                 // arr.push(set2);
 
-                                                datasetarr.push(set2)
+                                                // datasetarr.push(set2)
 
                                             })
 
-                                            var current = reactThis.state.data
-                                            current = datasetarr
-                                            reactThis.setState({data: current})
+                                            // var current = reactThis.state.data
+                                            // current = datasetarr
+                                            // reactThis.setState({data: current})
 
-                                            console.log(reactThis.state.data)
+                                            // console.log(reactThis.state.data)
                                         }
 
 
@@ -300,8 +302,8 @@ export default class Index extends React.Component{
         else{
             return(<div>
             <h1>Welcome!</h1>
-            <a href="/users/sign_up"><button>Sign Up</button></a>
-            <a href="/users/sign_in"><button>Sign In</button></a>
+            <a href="/users/sign_up"><Button size="sm">Sign Up</Button></a>
+            <a href="/users/sign_in"><Button size="sm">Sign In</Button></a>
 
           </div>);
         }

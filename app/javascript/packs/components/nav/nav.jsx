@@ -40,7 +40,7 @@ constructor(){
                 <NavLink to="/investments">Invest</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/transactions">Track</NavLink>
+                <NavLink to="/accounts/new">Save</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink to="/transactions">Transactions</NavLink>

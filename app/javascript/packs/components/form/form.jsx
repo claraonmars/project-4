@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { Button } from 'mdbreact'
+
 
 
 import './style.scss';
@@ -12,24 +14,58 @@ var request = require('request');
 class Debit extends React.Component{
     render(){
     return(
-        <div>
-            <div>
-            Name on card
-            <input onChange={this.props.debitName} name={this.props.debitValue} />
+        <div className={this.props.class}>
+            <br/><br/>
+            <div className="row justify-content-center">
+            <h1>Link a debit card</h1>
             </div>
-            <div>
-            Card Number
-            <input onChange={this.props.debitNumber} number={this.props.debitValue} />
+
+            <div className="row justify-content-center">
+                <div className="col-2">
+                Name on card
+                </div>
+                <div className="col-3">
+                <input onChange={this.props.debitName} name={this.props.debitValue} />
+                </div>
             </div>
-            <div>
-            Card expiry
-            <input onChange={this.props.debitExpiry} expiry={this.props.debitValue} />
-            </div>
-            <div>
-            CV
-            <input onChange={this.props.debitCv} cv={this.props.debitValue} />
+
             <br/>
-            <button onClick={this.props.debitSubmit}>Add debit card</button>
+
+            <div className="row justify-content-center">
+                <div className="col-2">
+                Card Number
+                </div>
+                <div className="col-3">
+                <input onChange={this.props.debitNumber} number={this.props.debitValue} />
+                </div>
+            </div>
+
+            <br/>
+
+            <div className="row justify-content-center">
+                <div className="col-2">
+                Card expiry
+                </div>
+                <div className="col-3">
+                <input onChange={this.props.debitExpiry} expiry={this.props.debitValue} />
+                </div>
+            </div>
+
+            <br/>
+
+            <div className="row justify-content-center">
+                <div className="col-2">
+                CV
+                </div>
+
+                <div className="col-3">
+                <input onChange={this.props.debitCv} cv={this.props.debitValue} />
+                </div>
+            </div>
+            <br/>
+
+            <div className="row justify-content-center">
+                <Button size="sm" onClick={this.props.debitSubmit}>Add debit card</Button>
             </div>
         </div>);
         }
@@ -40,8 +76,22 @@ class Debit extends React.Component{
 class Otp extends React.Component{
   render(){
     return(<div className={this.props.class}>
-        <input onChange={this.props.getOtp} value={this.props.otpvalue}/>
-        <button onClick={this.props.otpSubmit}>Submit OTP</button>
+        <br/><br/>
+        <div className="row justify-content-center">
+        <h1>One time password</h1>
+        </div>
+
+            <div className="row justify-content-center">
+            <div class="col-2">OTP:</div>
+            <div class="col-3">
+            <input onChange={this.props.getOtp} value={this.props.otpvalue}/>
+            </div>
+            </div>
+            <br/>
+
+        <div className="row justify-content-center">
+        <Button size="sm" onClick={this.props.otpSubmit}>Submit OTP</Button>
+        </div>
           </div>);
         }
   }
@@ -51,18 +101,38 @@ class Otp extends React.Component{
 class AddCurrent extends React.Component{
   render(){
     return(<div className={this.props.class}>
-        <p>Add your Current Account details</p>
-            <select onChange={this.props.getCurrentBank} value={this.props.currentBank}>
-            <option>Choose a bank</option>
-            <option value='DBS/POSB'>DBS/POSB</option>
-            <option value='UOB'>UOB</option>
-            <option value='OCBC'>OCBC</option>
-            <option value='CITIBANK'>Citibank</option>
-            </select>
+        <br/><br/>
+        <div className="row justify-content-center">
+        <h1>Add your Current Account details</h1>
+        </div>
+
+            <div className="row justify-content-center">
+            <div class="col-2">Bank:</div>
+            <div class="col-3">
+                <select onChange={this.props.getCurrentBank} value={this.props.currentBank}>
+                <option>Choose a bank</option>
+                <option value='DBS/POSB'>DBS/POSB</option>
+                <option value='UOB'>UOB</option>
+                <option value='OCBC'>OCBC</option>
+                <option value='CITIBANK'>Citibank</option>
+                </select>
+            </div>
+            </div>
+
             <br/>
-            Account number:
-            <input onChange={this.props.getCurrentNum} value={this.props.currentNum}/>
-            <button onClick={this.props.addCurrentAcc}>submit</button>
+
+             <div className="row justify-content-center">
+                <div class="col-2">Account number:</div>
+                <div class="col-3">
+                <input onChange={this.props.getCurrentNum} value={this.props.currentNum}/>
+                </div>
+            </div>
+
+            <br/>
+
+            <div className="row justify-content-center">
+            <Button size="sm" onClick={this.props.addCurrentAcc}>submit</Button>
+            </div>
           </div>);
   }
 }
@@ -72,14 +142,33 @@ class AddCurrent extends React.Component{
 class AddSavings extends React.Component{
   render(){
     return(<div className={this.props.class}>
-        <p>Add your Current Account details</p>
-            <select>
-            <option value={this.props.savingBank}>{this.props.savingBank}</option>
-            </select>
+        <br/><br/>
+        <div className="row justify-content-center">
+        <h1>Add your Saving Account details</h1>
+        </div>
+
+            <div className="row justify-content-center">
+                <div class="col-2">Bank:</div>
+                <div class="col-3">
+                <select>
+                <option value={this.props.savingBank}>{this.props.savingBank}</option>
+                </select>
+                </div>
+            </div>
+
             <br/>
-            Account number:
-            <input onChange={this.props.getSavingNum} value={this.props.savingNum}/>
-            <button onClick={this.props.addSavingAcc}>submit</button>
+            <div className="row justify-content-center">
+                <div class="col-2">
+                Account number:
+                </div>
+                <div class="col-3">
+                <input onChange={this.props.getSavingNum} value={this.props.savingNum}/>
+                </div>
+            </div>
+            <br/>
+            <div className="row justify-content-center">
+            <Button size="sm" onClick={this.props.addSavingAcc}>submit</Button>
+            </div>
           </div>);
   }
 }
@@ -99,6 +188,7 @@ class Form extends React.Component{
                 user_id: 0
         },
         otp: 0,
+        card_class:'normal',
         otp_class: 'hidden',
         current_class: 'hidden',
         saving_class: 'hidden',
@@ -267,7 +357,7 @@ class Form extends React.Component{
         console.log('post req', data);
     })
 
-    reactThis.setState({otp_class: 'normal'})
+    reactThis.setState({otp_class: 'normal', card_class: 'hidden', })
 
     ////////////////////////////////////////////////////////////
     // UNRESOLVED: generate random otp            Call otp
@@ -305,7 +395,11 @@ class Form extends React.Component{
     ////////////////////////////////////////////////////////////
 
     otpSubmit(){
-        this.setState({current_class: 'normal'})
+        if (this.state.otp === 12345){
+        this.setState({current_class: 'normal', otp_class: 'hidden'})}
+        else{
+            alert('Invalid OTP')
+        }
     }
 
 
@@ -352,7 +446,7 @@ class Form extends React.Component{
         console.log('post req', data);
     })
 
-    reactThis.setState({saving_class: 'normal', bank: 'default'})
+    reactThis.setState({saving_class: 'normal', current_class: 'hidden', bank: 'default'})
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -420,7 +514,7 @@ renderRedirect = () => {
         debitNumberValue={this.state.card.number}
         debitExpiryValue={this.state.card.expiry}
         debitCvValue={this.state.card.cv}
-        class={this.state.class} />
+        class={this.state.card_class} />
 
         <Otp
         otpvalue={this.state.otp}

@@ -15,7 +15,7 @@ class Rounding extends React.Component{
     render(){
         return(<div className={this.props.class}>
             Rounding investments round up your purchases to the next dollar and invests the change in your savings account.
-
+            <br/>
             <Button size="sm" onClick={this.props.setRounding}>Implement Rounding!</Button>
 
             </div>)
@@ -28,7 +28,7 @@ class Recurring extends React.Component{
     render(){
         return(<div className={this.props.class}>
             Recurring investments add the set amount to your savings account every month.
-
+            <br/>
             <input onChange={this.props.getRecurring} value={this.props.recurring_amt}/>
             <Button size="sm" onClick={this.props.setRecurring}>Recurr Monthly!</Button>
             </div>)
@@ -42,7 +42,7 @@ class Oneoff extends React.Component{
     render(){
         return(<div className={this.props.class}>
             Make a one off investment.
-
+            <br/>
             <input onChange={this.props.getoneoff} value={this.props.oneoff}/>
             <Button size="sm" onClick={this.props.setoneoff}>Invest now!</Button>
             </div>)
@@ -428,30 +428,36 @@ class Invest extends React.Component{
 
                 return(<div>
                     <h1>Investments</h1>
-                    How would you like to invest?<br/>
+                    We've helped you saved this month:
+                    <PieChart data={this.state.data} />
+                    <br/>
+                    Invest more?<br/>
                     <Button rounded outline onClick={this.rounding}>Rounding</Button>
                     <Button rounded outline onClick={this.recurring}>Recurring</Button>
-                    <Button rounded outline onClick={this.oneoff}>One off</Button>
+                    <Button rounded outline onClick={this.oneoff}>One off</Button><br/><br/>
 
+                    <div class="holder">
                     <Rounding
                     class={this.state.rounding_class}
                     setRounding={this.setRounding}/>
+                    </div>
 
+                    <div class="holder">
                     <Recurring
                     class={this.state.recurring_class}
                     getRecurring={this.getRecurring}
                     setRecurring={this.setRecurring}
                     recurring_amt={this.state.investment.recurring_amount}/>
+                    </div>
 
+                    <div class="holder">
                     <Oneoff
                     class={this.state.oneoff_class}
                     getoneoff={this.getoneoff}
                     setoneoff={this.setoneoff}
                     oneoff={this.state.investment.oneoff}/>
+                    </div>
 
-                    <br/>
-                    (Appname) helped you saved this month:
-                    <PieChart data={this.state.data} />
 
 
                     </div>)
