@@ -20,15 +20,14 @@ pre {
 }
 
 a {
-  color: #000;
+  color: #fff;
 
   &:visited {
-    color: #666;
+    color: #fff;
   }
 
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: #20BBB2!important;
   }
 }
 
@@ -85,4 +84,46 @@ label {
 
 .hidden{
 	display:none;
+}
+
+.navbar{
+	background-color:#373F51;
+}
+
+.nav-link{
+		color:white!important;
+
+}
+
+.header_text h1, h4{
+	color:white!important;
+}
+
+.row{
+	margin:0!important;
+}
+
+.container{
+	width:100vw;
+	padding:0!important;
+	margin:0!important;
+}
+
+.article{
+	height:100vh;
+	width:100vw;
+}
+
+.landing{
+	position:relative;
+	background-image: url('landing.jpg');
+	background-size:cover;
+	width:100vw;
+	height:100vh;
+	background-repeat: no-repeat;
+}
+
+.header_text{
+	top:25vh;
+	text-align:center;
 }
