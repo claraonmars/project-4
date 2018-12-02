@@ -34,13 +34,21 @@ class Body extends React.Component{
         }
         else{
         return(<div>
-            <Button size="sm"><a href="/investments">Start Investing!</a></Button>
-            <br/>
-
-            Accounts overview: (past 3 months):<br/>
+            <div className="row">
+            <div className="col-6">
+            Spendings overview:<br/>
             <LineChart data={this.props.data} />
+            </div>
+
+            <div className="col-6">
+            Savings overview:<br/>
+             <LineChart data={this.props.saving_data} />
+
+            </div>
+            <br/><br/>
 
 
+            </div>
             </div>)
 
         }
@@ -57,6 +65,7 @@ export default class Index extends React.Component{
         accounts: false,
         data: [],
         user_id: 0,
+        saving_data: [],
     }
 }
 
@@ -245,9 +254,9 @@ export default class Index extends React.Component{
 
                                                 key.forEach((key, i) => result[key] = value[i])
 
-                                                // var current = reactThis.state.data
-                                                // current = result
-                                                // reactThis.setState({data: current})
+                                                var current = reactThis.state.data
+                                                current = result
+                                                reactThis.setState({saving_data: current})
 
                                                 // var set2={
                                                 //     "name":"saving",
@@ -291,7 +300,7 @@ export default class Index extends React.Component{
         if (loggedin === 'true'){
             return(<div>
             <h1>Welcome back!</h1>
-            <Body data={this.state.data} account={this.state.accounts}/>
+            <Body data={this.state.data} saving_data={this.state.saving_data} account={this.state.accounts}/>
           </div>);
         }
 
@@ -301,10 +310,22 @@ export default class Index extends React.Component{
 
         else{
             return(<div>
-            <h1>Welcome!</h1>
-            <a href="/users/sign_up"><Button size="sm">Sign Up</Button></a>
-            <a href="/users/sign_in"><Button size="sm">Sign In</Button></a>
+            <div className="landing">
+                <div className='row justify-content-end'>
+                    <div className='col-6 header_text'>
+                        <h1>Effortless saving at your fingertips</h1>
+                        <h4>Manage your expenses, save money, track your spending.</h4>
+                        <div className='d-flex justify-content-center'>
+                        <a href="/users/sign_up"><Button size="md">Sign Up Today!</Button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div className="row article">
+                do this and that and that and that
+
+            </div>
           </div>);
         }
 

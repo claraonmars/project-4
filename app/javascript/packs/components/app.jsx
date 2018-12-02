@@ -6,6 +6,7 @@ import Form from './form/form'
 import Trans from './trans/trans'
 import Invest from './invest/invest'
 import Nav from './nav/nav'
+import Pay from './pay/pay'
 
 
 import {Switch, Route} from 'react-router-dom'
@@ -49,12 +50,13 @@ export default class App extends React.Component{
   render(){
 
     return(<div>
-            <Nav/>
+            <Nav loggedin={this.state.loggedin}/>
             <div className="container">
              <Switch>
                 <Route exact path="/" render={(props) => <Index {...props} loggedin={this.state.loggedin} user_id={this.state.id}/>}/>
                 <Route path="/accounts/new" render={(props) => <Form {...props} user_id={this.state.id}/>}/>
                 <Route path="/transactions" component={Trans}/>
+                <Route path="/pay" render={(props) => <Pay {...props} user_id={this.state.id}/>}/>
                 <Route path="/investments" render={(props) => <Invest {...props} user_id={this.state.id}/>}/>
             </Switch>
             </div>

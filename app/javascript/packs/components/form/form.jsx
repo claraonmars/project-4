@@ -15,7 +15,6 @@ class Debit extends React.Component{
     render(){
     return(
         <div className={this.props.class}>
-            <br/><br/>
             <div className="row justify-content-center">
             <h1>Link a debit card</h1>
             </div>
@@ -82,8 +81,8 @@ class Otp extends React.Component{
         </div>
 
             <div className="row justify-content-center">
-            <div class="col-2">OTP:</div>
-            <div class="col-3">
+            <div className="col-2">OTP:</div>
+            <div className="col-3">
             <input onChange={this.props.getOtp} value={this.props.otpvalue}/>
             </div>
             </div>
@@ -107,8 +106,8 @@ class AddCurrent extends React.Component{
         </div>
 
             <div className="row justify-content-center">
-            <div class="col-2">Bank:</div>
-            <div class="col-3">
+            <div className="col-2">Bank:</div>
+            <div className="col-3">
                 <select onChange={this.props.getCurrentBank} value={this.props.currentBank}>
                 <option>Choose a bank</option>
                 <option value='DBS/POSB'>DBS/POSB</option>
@@ -122,8 +121,8 @@ class AddCurrent extends React.Component{
             <br/>
 
              <div className="row justify-content-center">
-                <div class="col-2">Account number:</div>
-                <div class="col-3">
+                <div className="col-2">Account number:</div>
+                <div className="col-3">
                 <input onChange={this.props.getCurrentNum} value={this.props.currentNum}/>
                 </div>
             </div>
@@ -148,8 +147,8 @@ class AddSavings extends React.Component{
         </div>
 
             <div className="row justify-content-center">
-                <div class="col-2">Bank:</div>
-                <div class="col-3">
+                <div className="col-2">Bank:</div>
+                <div className="col-3">
                 <select>
                 <option value={this.props.savingBank}>{this.props.savingBank}</option>
                 </select>
@@ -158,10 +157,10 @@ class AddSavings extends React.Component{
 
             <br/>
             <div className="row justify-content-center">
-                <div class="col-2">
+                <div className="col-2">
                 Account number:
                 </div>
-                <div class="col-3">
+                <div className="col-3">
                 <input onChange={this.props.getSavingNum} value={this.props.savingNum}/>
                 </div>
             </div>
@@ -395,11 +394,8 @@ class Form extends React.Component{
     ////////////////////////////////////////////////////////////
 
     otpSubmit(){
-        if (this.state.otp === 12345){
-        this.setState({current_class: 'normal', otp_class: 'hidden'})}
-        else{
-            alert('Invalid OTP')
-        }
+
+        this.setState({current_class: 'normal', otp_class: 'hidden'})
     }
 
 

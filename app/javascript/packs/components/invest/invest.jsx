@@ -436,13 +436,13 @@ class Invest extends React.Component{
                     <Button rounded outline onClick={this.recurring}>Recurring</Button>
                     <Button rounded outline onClick={this.oneoff}>One off</Button><br/><br/>
 
-                    <div class="holder">
+                    <div className="holder">
                     <Rounding
                     class={this.state.rounding_class}
                     setRounding={this.setRounding}/>
                     </div>
 
-                    <div class="holder">
+                    <div className="holder">
                     <Recurring
                     class={this.state.recurring_class}
                     getRecurring={this.getRecurring}
@@ -450,7 +450,7 @@ class Invest extends React.Component{
                     recurring_amt={this.state.investment.recurring_amount}/>
                     </div>
 
-                    <div class="holder">
+                    <div className="holder">
                     <Oneoff
                     class={this.state.oneoff_class}
                     getoneoff={this.getoneoff}
