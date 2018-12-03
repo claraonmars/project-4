@@ -127,6 +127,8 @@ constructor(){
 
         once: 0,
 
+        redirect: false,
+
     }
 
     this.getAmount = this.getAmount.bind(this)
@@ -336,8 +338,6 @@ constructor(){
   componentDidUpdate(prevState){
     if(this.state.result != prevState.result && this.state.once === 1){
 
-        console.log(this.state.once)
-
         // Hard coding QR code data
         var qrSplit = this.state.result.data.split(',')
         var qrAmt = parseInt(qrSplit[0])
@@ -504,6 +504,7 @@ constructor(){
                                 .then(function(data){
                                     console.log('current',investmenttransc);
                                     console.log('data',data);
+
                                 })
 
                             }
@@ -529,7 +530,11 @@ constructor(){
             .then(function(data){
                 console.log('saving', newsavingtransc);
                 console.log('data',data);
+                reactThis.setState({redirect: true})
             })
+        }
+        else{
+            reactThis.setState({redirect: true})
         }
 
 
@@ -728,11 +733,18 @@ constructor(){
 
 }
 
+renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/pay/success' />
+    }
+  }
+
 
 
 render(){
     return(
         <div>
+        {this.renderRedirect()}
             <h1>Payment Gate</h1>
             <BrowserView>
             <Payform

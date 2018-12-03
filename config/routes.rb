@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/check_user', to: 'home#ajax', as: 'checkuser'
   get '/transactions', to: 'savings#index', as: 'transactions'
   get '/pay', to: 'currents#new', as: 'pay'
+  get '/success', to: 'currents#success', as: 'success'
 
   devise_scope :user do
   get '/users/sign_out' => 'devise/sessions#destroy'

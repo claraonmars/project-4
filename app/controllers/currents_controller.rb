@@ -2,6 +2,8 @@ class CurrentsController < ApplicationController
   before_action :set_current, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token
 
+def success
+end
 
   # GET /currents
   # GET /currents.json
