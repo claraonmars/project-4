@@ -50,7 +50,7 @@ render(){
             <div className="row justify-content-center">
                 <Button size="sm" onClick={this.props.submitform}>Make payment now</Button>
             </div>
-            <video autoplay></video>
+            <video></video>
             </BrowserView>
 
         </div>)
