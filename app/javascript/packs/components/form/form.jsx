@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Button } from 'mdbreact'
 
+import 'whatwg-fetch';
 
 
 import './style.scss';

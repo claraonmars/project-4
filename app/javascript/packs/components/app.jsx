@@ -7,6 +7,8 @@ import Trans from './trans/trans'
 import Invest from './invest/invest'
 import Nav from './nav/nav'
 import Pay from './pay/pay'
+import 'whatwg-fetch';
+
 
 
 import {Switch, Route} from 'react-router-dom'
