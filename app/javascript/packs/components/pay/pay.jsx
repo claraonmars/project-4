@@ -94,6 +94,7 @@ render(){
             </BrowserView>
 
             <MobileView>
+                Scan to Pay
                 <Test/>
             </MobileView>
 
