@@ -2,12 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Button } from 'mdbreact'
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile
+} from "react-device-detect";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class Payform extends React.Component{
 render(){
+
     return(<div>
+        <BrowserView>
         <div className="row justify-content-center">
             <h1>Make a payment to another account</h1>
             </div>
@@ -42,6 +50,9 @@ render(){
             <div className="row justify-content-center">
                 <Button size="sm" onClick={this.props.submitform}>Make payment now</Button>
             </div>
+            <video autoplay></video>
+            </BrowserView>
+
         </div>)
     }
 }
