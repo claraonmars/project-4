@@ -110,7 +110,7 @@ class Invest extends React.Component{
 //view current account's current investment plans //
 ////////////////////////////////////////////////////////////
 
-        fetch('http://localhost:3000/investments',{
+        fetch('/investments',{
             method: 'get',
             headers : {
                 'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ class Invest extends React.Component{
                             reactThis.setState({investment: data.investments[j]})
 
                                 //set state as last current account transaction
-                                fetch('http://localhost:3000/currents/'+ data.investments[j].id,{
+                                fetch('/currents/'+ data.investments[j].id,{
                                     method: 'get',
                                     headers : {
                                         'Content-Type': 'application/json',
@@ -159,7 +159,7 @@ class Invest extends React.Component{
 
                 else if(data.accounts[i].name === 'saving'){
 
-                            fetch('http://localhost:3000/savings/'+ data.accounts[i].id,{
+                            fetch('/savings/'+ data.accounts[i].id,{
                                     method: 'get',
                                     headers : {
                                         'Content-Type': 'application/json',
@@ -182,7 +182,7 @@ class Invest extends React.Component{
                             // set state as all savings done through app //
                             ////////////////////////////////////////////////////////////
 
-                            fetch('http://localhost:3000/accounts/'+ data.accounts[i].id+'/savings',{
+                            fetch('/accounts/'+ data.accounts[i].id+'/savings',{
                                     method: 'get',
                                     headers : {
                                         'Content-Type': 'application/json',
@@ -288,7 +288,7 @@ class Invest extends React.Component{
         this.setState({investment: investment})
 
 
-        fetch('http://localhost:3000/investments/' + this.state.investment.id,{
+        fetch('/investments/' + this.state.investment.id,{
                 method: 'put',
                 body: JSON.stringify(reactThis.state.investment),
                 headers : {
@@ -322,7 +322,7 @@ class Invest extends React.Component{
         console.log('look here', this.state.investment)
 
         var reactThis = this
-        fetch('http://localhost:3000/investments/' + reactThis.state.investment.id,{
+        fetch('/investments/' + reactThis.state.investment.id,{
                 method: 'put',
                 body: JSON.stringify(reactThis.state.investment),
                 headers : {
@@ -384,7 +384,7 @@ class Invest extends React.Component{
         }
 
         //make a new transaction to transfer $ from current ...
-        fetch('http://localhost:3000/currents/',{
+        fetch('/currents/',{
                 method: 'post',
                 body: JSON.stringify(newcurrenttransc),
                 headers : {
@@ -401,7 +401,7 @@ class Invest extends React.Component{
         })
 
         // ....to savings
-        fetch('http://localhost:3000/savings/',{
+        fetch('/savings/',{
                 method: 'post',
                 body: JSON.stringify(newsavingtransc),
                 headers : {

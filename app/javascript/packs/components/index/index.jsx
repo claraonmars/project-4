@@ -72,7 +72,7 @@ export default class Index extends React.Component{
 
     componentDidMount(){
     var reactThis = this
-    fetch('http://localhost:3000/check_user',{
+    fetch('/check_user',{
         method: 'get',
         headers : {
             'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ export default class Index extends React.Component{
                 //view current account's current investment plans //
                 ////////////////////////////////////////////////////////////
 
-                        fetch('http://localhost:3000/investments',{
+                        fetch('/investments',{
                             method: 'get',
                             headers : {
                                 'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ export default class Index extends React.Component{
                                         // find all current account transactions //
                                         ////////////////////////////////////////////////////////////
 
-                                        fetch('http://localhost:3000/accounts/'+ data.accounts[i].id +'/currents',{
+                                        fetch('/accounts/'+ data.accounts[i].id +'/currents',{
                                                 method: 'get',
                                                 headers : {
                                                     'Content-Type': 'application/json',
@@ -198,7 +198,7 @@ export default class Index extends React.Component{
                                         // find all current account transactions //
                                         ////////////////////////////////////////////////////////////
 
-                                        fetch('http://localhost:3000/accounts/'+ data.accounts[i].id +'/savings',{
+                                        fetch('/accounts/'+ data.accounts[i].id +'/savings',{
                                                 method: 'get',
                                                 headers : {
                                                     'Content-Type': 'application/json',

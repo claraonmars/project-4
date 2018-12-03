@@ -242,7 +242,7 @@ class Form extends React.Component{
     componentDidMount(){
         var reactThis = this
 
-        fetch('http://localhost:3000/investments',{
+        fetch('/investments',{
             method: 'get',
             headers : {
                 'Content-Type': 'application/json',
@@ -341,7 +341,7 @@ class Form extends React.Component{
 
     debitSubmit(){
     var reactThis = this
-    fetch('http://localhost:3000/cards',{
+    fetch('/cards',{
         method: 'post',
         body: JSON.stringify(reactThis.state.card),
         headers : {
@@ -427,7 +427,7 @@ class Form extends React.Component{
 
     addCurrentAcc(){
     var reactThis = this
-    fetch('http://localhost:3000/accounts',{
+    fetch('/accounts',{
         method: 'post',
         body: JSON.stringify(reactThis.state.account),
         headers : {
@@ -467,7 +467,7 @@ class Form extends React.Component{
 
     addSavingAcc(){
     var reactThis = this
-    fetch('http://localhost:3000/accounts',{
+    fetch('/accounts',{
         method: 'post',
         body: JSON.stringify(reactThis.state.account),
         headers : {

@@ -26,7 +26,7 @@ export default class App extends React.Component{
 }
     componentDidMount(){
     var reactThis = this
-    fetch('http://localhost:3000/check_user',{
+    fetch('/check_user',{
         method: 'get',
         headers : {
             'Content-Type': 'application/json',

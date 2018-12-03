@@ -230,7 +230,7 @@ class Trans extends React.Component{
     componentDidMount(){
     var reactThis = this
 
-    fetch('http://localhost:3000/accounts/2/savings',{
+    fetch('/accounts/2/savings',{
         method: 'get',
         headers : {
             'Content-Type': 'application/json',
@@ -245,7 +245,7 @@ class Trans extends React.Component{
         reactThis.setState({saving_trans: data})
     })
 
-    fetch('http://localhost:3000/accounts/1/currents',{
+    fetch('/accounts/1/currents',{
         method: 'get',
         headers : {
             'Content-Type': 'application/json',

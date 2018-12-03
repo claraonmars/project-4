@@ -9,6 +9,45 @@ import {
   isMobile
 } from "react-device-detect";
 
+import QrReader from "react-qr-reader";
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+class Test extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      delay: 300,
+      result: "No result"
+    };
+    this.handleScan = this.handleScan.bind(this);
+  }
+  handleScan(data) {
+    if (data) {
+      this.setState({
+        result: data
+      });
+    }
+  }
+  handleError(err) {
+    console.error(err);
+  }
+  render() {
+    return (
+      <div>
+        <QrReader
+          delay={this.state.delay}
+          onError={this.handleError}
+          onScan={this.handleScan}
+          style={{ width: "100%" }}
+        />
+        <p>{this.state.result}</p>
+      </div>
+    );
+  }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class Payform extends React.Component{
@@ -50,8 +89,11 @@ render(){
             <div className="row justify-content-center">
                 <Button size="sm" onClick={this.props.submitform}>Make payment now</Button>
             </div>
-            <video></video>
             </BrowserView>
+
+            <MobileView>
+                <Test/>
+            </MobileView>
 
         </div>)
     }
@@ -104,11 +146,12 @@ constructor(){
 
     componentDidMount(){
 
+
         var reactThis = this
         reactThis.setState({user_id: this.props.user_id})
 
         //get all current transactions
-        fetch('http://localhost:3000/accounts/1/currents',{
+        fetch('/accounts/1/currents',{
             method: 'get',
             headers : {
                 'Content-Type': 'application/json',
@@ -135,7 +178,7 @@ constructor(){
 
 
         //get all savings transactions
-        fetch('http://localhost:3000/accounts/2/savings',{
+        fetch('/accounts/2/savings',{
             method: 'get',
             headers : {
                 'Content-Type': 'application/json',
@@ -161,7 +204,7 @@ constructor(){
         })
 
         //get active investment plans
-         fetch('http://localhost:3000/investments',{
+         fetch('/investments',{
             method: 'get',
             headers : {
                 'Content-Type': 'application/json',
@@ -221,7 +264,7 @@ constructor(){
                                 }
                             }
 
-                            fetch('http://localhost:3000/currents/',{
+                            fetch('/currents/',{
                                         method: 'post',
                                         body: JSON.stringify(newcurrenttransc),
                                         headers : {
@@ -237,7 +280,7 @@ constructor(){
                                         // console.log('data',data);
                                 })
 
-                            fetch('http://localhost:3000/savings/',{
+                            fetch('/savings/',{
                                     method: 'post',
                                     body: JSON.stringify(newsavingtransc),
                                     headers : {
@@ -363,7 +406,7 @@ constructor(){
         ////////////////////////////////////////////////////////////
 
         //make a new transaction to transfer $ from current ...
-        fetch('http://localhost:3000/currents/',{
+        fetch('/currents/',{
                 method: 'post',
                 body: JSON.stringify(newcurrenttransc),
                 headers : {
@@ -379,7 +422,7 @@ constructor(){
                 console.log('data',data);
 
                     //get updated current transactions
-                    fetch('http://localhost:3000/accounts/1/currents',{
+                    fetch('/accounts/1/currents',{
                         method: 'get',
                         headers : {
                             'Content-Type': 'application/json',
@@ -416,7 +459,7 @@ constructor(){
 
 
                             if (investmenttransc != null){
-                                fetch('http://localhost:3000/currents/',{
+                                fetch('/currents/',{
                                     method: 'post',
                                     body: JSON.stringify(investmenttransc),
                                     headers : {
@@ -441,7 +484,7 @@ constructor(){
         // ....to savings
 
         if (newsavingtransc != null){
-        fetch('http://localhost:3000/savings/',{
+        fetch('/savings/',{
                 method: 'post',
                 body: JSON.stringify(newsavingtransc),
                 headers : {
