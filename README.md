@@ -34,7 +34,6 @@ It is currently in demo version purely to showcase its functionalities because b
 git clone
 ./bin/webpack-dev-server (in one CLI)
 rails s (in another CLI)
-
 ```
 
 ## Technical Considerations
