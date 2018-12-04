@@ -30,10 +30,9 @@ It is currently in demo version purely to showcase its functionalities because b
 
 ## Get started
 
-`git clone
-./bin/webpack-dev-server (in one CLI)
-rails s (in another CLI)`
-
+`git clone`
+`./bin/webpack-dev-server (in one CLI)`
+`rails s (in another CLI)`
 
 ## Technical Considerations
 * React on Rails, Webpack
