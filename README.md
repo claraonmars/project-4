@@ -31,18 +31,19 @@ It is currently in demo version purely to showcase its functionalities because b
 ## Technical Considerations
 * React on Rails, Webpack
 
-* Javascript, Css
+* Javascript, CSS
 
 * Ajax, TextBelt API
 
-* npm packages: MDBootstrap React, Chartkick, React-router, whatwg-fetch
+* npm packages: MDBootstrap React, Chartkick, React-router, whatwg-fetch, react-device-detect, react-qr-reader
 
 ## Deliverables
 Working app is hosted [here](https://project4-savemore.herokuapp.com/)
 
 ## Unresolved issues
-[ ] Chartkick runs an error when combining two LineCharts
+[ ] Chartkick runs an error when combining two LineCharts.
 
+[ ] QR reader makes payment 3 times.
 
 
 
