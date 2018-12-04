@@ -434,7 +434,7 @@ class Invest extends React.Component{
                     <PieChart data={this.state.data} colors={["#20BBB2", "#8ED2CD", '#076F69']}/>
                     <br/>
                     Invest more?<br/>
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-start">
                     <div class='col-8'>
                     <Button rounded outline onClick={this.rounding}>Rounding</Button>
                     <Button rounded outline onClick={this.recurring}>Recurring</Button>
