@@ -104,9 +104,8 @@ label {
 }
 
 .container{
-	width:100vw;
+	width:100vw!important;
 	padding:0!important;
-	margin:0!important;
 }
 
 .article{
@@ -116,7 +115,7 @@ label {
 
 .landing{
 	position:relative;
-	background-image: url('./landing.jpg');
+	background-image: url('https://res.cloudinary.com/dsfjnc10g/image/upload/v1543853531/landing.jpg');
 	background-size:cover;
 	width:100vw;
 	height:100vh;
@@ -126,4 +125,10 @@ label {
 .header_text{
 	top:25vh;
 	text-align:center;
+}
+
+@media (min-width: 768px){
+	.container{
+	max-width:780px!important;
+	}
 }

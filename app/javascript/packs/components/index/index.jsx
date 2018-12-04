@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ReactChartkick, { LineChart, PieChart } from 'react-chartkick'
+import ReactChartkick, { LineChart, PieChart, BarChart } from 'react-chartkick'
 import Chart from 'chart.js'
 
 ReactChartkick.addAdapter(Chart)
@@ -36,21 +36,21 @@ class Body extends React.Component{
         }
         else{
         return(<div>
-            <div className="row">
-            <div className="col-6">
+            <div className="row justify-content-end'">
+            <div className="col-12">
             Spendings overview:<br/>
-            <LineChart data={this.props.data} />
+            <LineChart data={this.props.data} height="500px" colors={["#20BBB2"]}/>
+            </div>
             </div>
 
+            {/*<div className="row">
             <div className="col-6">
             Savings overview:<br/>
-             <LineChart data={this.props.saving_data} />
+             <BarChart data={this.props.saving_data} colors={["#20BBB2"]}/>
 
             </div>
-            <br/><br/>
+            </div>*/}
 
-
-            </div>
             </div>)
 
         }
@@ -105,6 +105,7 @@ export default class Index extends React.Component{
                             return response.json()
                         })
                         .then(function(data){
+                            console.log('this data', data)
                             for (var i = 0; i<data.accounts.length; i ++){
                                 if(data.accounts[i].user_id === reactThis.state.user_id){
                                     var datasetarr=[]
@@ -302,7 +303,7 @@ export default class Index extends React.Component{
         if (loggedin === 'true'){
             return(<div>
             <h1>Welcome back!</h1>
-            <Body data={this.state.data} saving_data={this.state.saving_data} account={this.state.accounts}/>
+            <Body data={this.state.data} saving_data={this.state.saving_data} account={this.state.accounts} />
           </div>);
         }
 

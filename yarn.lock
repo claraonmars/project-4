@@ -6821,6 +6821,13 @@ react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.2, react-lifecycles
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-meta-tags@^0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/react-meta-tags/-/react-meta-tags-0.7.2.tgz#a7553f0ce5b8c7f7e48a4ebcc25b91533e319163"
+  integrity sha512-BfrAMqm0N0qeVvpNZInNbC9kbew24iD11s7Wf3mSfRplg0LvDU2mvJ3nm/ZO1qOVn5TIieb9G4hUB0xiE5VQyw==
+  dependencies:
+    prop-types "^15.6.0"
+
 react-modal@^3.4.4:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.6.1.tgz#54d27a1ec2b493bbc451c7efaa3557b6af82332d"

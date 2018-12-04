@@ -431,7 +431,7 @@ class Invest extends React.Component{
                 return(<div>
                     <h1>Investments</h1>
                     We've helped you saved this month:
-                    <PieChart data={this.state.data} />
+                    <PieChart data={this.state.data} colors={["#20BBB2", "#07A0D6"]}/>
                     <br/>
                     Invest more?<br/>
                     <Button rounded outline onClick={this.rounding}>Rounding</Button>
