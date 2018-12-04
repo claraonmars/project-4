@@ -221,14 +221,14 @@ class Invest extends React.Component{
                                         newsplit = newsplit.slice(0, 4)
                                         newsplit = newsplit.join('')
 
-                                        if (data[i].sort === 'CREDIT' && newsplit === '1811'){
+                                        if (data[i].sort === 'CREDIT' && newsplit === '1812'){
                                             if(data[i].operation === 'One Off Invest'){
                                                 cat1amt = cat1amt + parseFloat(data[i].amount)
                                             }
                                             else if(data[i].operation === 'Recurring'){
                                                 cat2amt = cat2amt + parseFloat(data[i].amount)
                                             }
-                                            else if(data[i].operation === 'Rounding'){
+                                            else if(data[i].operation === 'Rounding Investment'){
                                                 cat3amt = cat3amt + parseFloat(data[i].amount)
                                             }
                                             else{

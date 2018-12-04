@@ -2,6 +2,11 @@
 # The data ca the be loaded with the rails db:seed commad (or create!d alogside the database with db:setup, account_id: 1, merchant_id:1).
 User.create(email: "clara@email.com", password: "123456")
 
+Investment.create!(rounding: true, recurring: false, oneoff: 0, account_id: 1)
+Investment.create!(rounding: false, recurring: false, oneoff: 0, account_id: 2)
+
+Card.create!(name: 'clara koh', card_number: 1234567890, expiry: '11/11', cv: 100, user_id:1)
+
 Account.create!(name: 'current', user_id: 1, bank: 'DBS/POSB', account_number: 1234567890)
 Account.create!(name: 'saving', user_id: 1, bank: 'DBS/POSB', account_number: 1234567890)
 
@@ -791,12 +796,10 @@ Saving.create!(date: 181202, sort: "DEBIT", operation: "CREDIT TO MERCHANT", amo
 Saving.create!(date: 181202, sort: "DEBIT", operation: "CREDIT TO MERCHANT", amount: 1410.00, balance: 43343.70, account_id: 2)
 Saving.create!(date: 181203, sort: "CREDIT", operation: "", amount: 181.10, balance: 43524.80, account_id: 2)
 Saving.create!(date: 181203, sort: "CREDIT", operation: "One Off Invest", amount: 200.00, balance: 43724.80, account_id: 2)
-Saving.create!(date: 181204, sort: "CREDIT", operation: "Rounding", amount: 0.50, balance: 43725.30, account_id: 2)
-Saving.create!(date: 181204, sort: "CREDIT", operation: "Rounding", amount: 0.10, balance: 43725.40, account_id: 2)
-Saving.create!(date: 181204, sort: "CREDIT", operation: "Rounding", amount: 0.01, balance: 43725.41, account_id: 2)
-
-Investment.create!(rounding: true, recurring: false, recurring_amount: null, oneoff: 0, account_id: 1)
-Investment.create!(rounding: false, recurring: false, recurring_amount: null, oneoff: 0, account_id: 2)
+Saving.create!(date: 181204, sort: "CREDIT", operation: "Rounding Investment", amount: 0.50, balance: 43725.30, account_id: 2)
+Saving.create!(date: 181204, sort: "CREDIT", operation: "Rounding Investment", amount: 0.10, balance: 43725.40, account_id: 2)
+Saving.create!(date: 181204, sort: "CREDIT", operation: "Rounding Investment", amount: 0.01, balance: 43725.41, account_id: 2)
+Saving.create!(date: 181204, sort: "CREDIT", operation: "Rounding Investment", amount: 0.50, balance: 43725.91, account_id: 2)
 
 
 Merchant.create!(category: 'Food')
