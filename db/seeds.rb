@@ -2,8 +2,8 @@
 # The data ca the be loaded with the rails db:seed commad (or create!d alogside the database with db:setup, account_id: 1, merchant_id:1).
 User.create(email: "clara@email.com", password: "123456")
 
-Account.create()
-Account.create()
+Account.create(name: 'current', user_id: 1, bank: 'DBS/POSB', account_number: 1234567890)
+Account.create(name: 'saving', user_id: 1, bank: 'DBS/POSB', account_number: 1234567890)
 
 Current.create!(date: 130113, sort: "CREDIT", operation: "CREDIT IN CASH", amount: 800.00, balance: 800.00, account_id: 1, merchant_id:1)
 Current.create!(date: 130114, sort: "CREDIT", operation: "COLLECTION FROM ANOTHER BANK", amount: 44749.00, balance: 45549.00, account_id: 1, merchant_id:1)
