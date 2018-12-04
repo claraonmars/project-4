@@ -8,6 +8,7 @@ import Invest from './invest/invest'
 import Nav from './nav/nav'
 import Pay from './pay/pay'
 import Paysuccess from './pay/success'
+import Account from './account/account'
 
 import 'whatwg-fetch';
 
@@ -58,7 +59,11 @@ export default class App extends React.Component{
             <div className="container">
              <Switch>
                 <Route exact path="/" render={(props) => <Index {...props} loggedin={this.state.loggedin} user_id={this.state.id}/>}/>
+                <Route path="/users/sign_in" component={Nav}/>
+                <Route path="/users/sign_up" component={Nav}/>
                 <Route path="/accounts/new" render={(props) => <Form {...props} user_id={this.state.id}/>}/>
+
+                <Route path="/accounts" component={Account}/>
                 <Route path="/transactions" component={Trans}/>
                 <Route path="/pay" render={(props) => <Pay {...props} user_id={this.state.id}/>}/>
                 <Route path="/success" component={Paysuccess}/>

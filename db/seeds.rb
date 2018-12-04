@@ -785,11 +785,16 @@ Saving.create!(date: 181107, sort: "CREDIT", operation: "COLLECTION FROM ANOTHER
 Saving.create!(date: 181109, sort: "DEBIT", operation: "REMITTACE TO ANOTHER BANK", amount: 2161.00, balance: 43929.10, account_id: 2)
 Saving.create!(date: 181130, sort: "CREDIT", operation: "", amount: 178.20, balance: 44107.30, account_id: 2)
 Saving.create!(date: 181130, sort: "DEBIT", operation: "CREDIT TO MERCHANT", amount: 14.60, balance: 44092.70, account_id: 2)
-Saving.create!(date: 181207, sort: "CREDIT", operation: "COLLECTION FROM ANOTHER BANK", amount: 3242.00, balance: 47334.70, account_id: 2)
-Saving.create!(date: 181209, sort: "DEBIT", operation: "REMITTACE TO ANOTHER BANK", amount: 2161.00, balance: 45173.70, account_id: 2)
-Saving.create!(date: 181214, sort: "DEBIT", operation: "CREDIT TO MERCHANT", amount: 420.00, balance: 44753.70, account_id: 2)
-Saving.create!(date: 181226, sort: "DEBIT", operation: "CREDIT TO MERCHANT", amount: 1410.00, balance: 43343.70, account_id: 2)
-Saving.create!(date: 181231, sort: "CREDIT", operation: "", amount: 181.10, balance: 43524.80, account_id: 2)
+Saving.create!(date: 181201, sort: "CREDIT", operation: "COLLECTION FROM ANOTHER BANK", amount: 3242.00, balance: 47334.70, account_id: 2)
+Saving.create!(date: 181201, sort: "DEBIT", operation: "REMITTACE TO ANOTHER BANK", amount: 2161.00, balance: 45173.70, account_id: 2)
+Saving.create!(date: 181202, sort: "DEBIT", operation: "CREDIT TO MERCHANT", amount: 420.00, balance: 44753.70, account_id: 2)
+Saving.create!(date: 181202, sort: "DEBIT", operation: "CREDIT TO MERCHANT", amount: 1410.00, balance: 43343.70, account_id: 2)
+Saving.create!(date: 181203, sort: "CREDIT", operation: "", amount: 181.10, balance: 43524.80, account_id: 2)
+Saving.create!(date: 181203, sort: "CREDIT", operation: "One Off Invest", amount: 200.00, balance: 43724.80, account_id: 2)
+Saving.create!(date: 181204, sort: "CREDIT", operation: "Rounding", amount: 0.50, balance: 43725.30, account_id: 2)
+Saving.create!(date: 181204, sort: "CREDIT", operation: "Rounding", amount: 0.10, balance: 43725.40, account_id: 2)
+Saving.create!(date: 181204, sort: "CREDIT", operation: "Rounding", amount: 0.01, balance: 43725.41, account_id: 2)
+
 
 
 

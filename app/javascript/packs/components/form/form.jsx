@@ -16,57 +16,50 @@ class Debit extends React.Component{
     render(){
     return(
         <div className={this.props.class}>
-            <div className="row justify-content-center">
-            <h1>Link a debit card</h1>
-            </div>
+            <h1>Debit card</h1>
+            Link your debit card:
+            <div className='row justify-content-start debit'>
 
-            <div className="row justify-content-center">
-                <div className="col-2">
+                <div className='col-6'>
+                <div>
                 Name on card
                 </div>
-                <div className="col-3">
+                <div className='field'>
                 <input onChange={this.props.debitName} name={this.props.debitValue} />
                 </div>
-            </div>
 
             <br/>
 
-            <div className="row justify-content-center">
-                <div className="col-2">
+                <div >
                 Card Number
                 </div>
-                <div className="col-3">
+                <div className='field'>
                 <input onChange={this.props.debitNumber} number={this.props.debitValue} />
                 </div>
-            </div>
 
             <br/>
 
-            <div className="row justify-content-center">
-                <div className="col-2">
+                <div >
                 Card expiry
                 </div>
-                <div className="col-3">
+                <div className='field'>
                 <input onChange={this.props.debitExpiry} expiry={this.props.debitValue} />
                 </div>
-            </div>
 
             <br/>
 
-            <div className="row justify-content-center">
-                <div className="col-2">
+                <div >
                 CV
                 </div>
 
-                <div className="col-3">
+                <div className='field'>
                 <input onChange={this.props.debitCv} cv={this.props.debitValue} />
                 </div>
-            </div>
             <br/>
 
-            <div className="row justify-content-center">
                 <Button size="sm" onClick={this.props.debitSubmit}>Add debit card</Button>
-            </div>
+                </div>
+                </div>
         </div>);
         }
   }
@@ -76,21 +69,22 @@ class Debit extends React.Component{
 class Otp extends React.Component{
   render(){
     return(<div className={this.props.class}>
-        <br/><br/>
-        <div className="row justify-content-center">
-        <h1>One time password</h1>
-        </div>
-
-            <div className="row justify-content-center">
-            <div className="col-2">OTP:</div>
-            <div className="col-3">
-            <input onChange={this.props.getOtp} value={this.props.otpvalue}/>
+        <h1>Debit card</h1>
+        Your One Time Password has been sent to the mobile number registered to your debit card.
+            <div className="row justify-content-start debit">
+            <div className='col-6'>
+            <div>
+            One Time Password:
             </div>
+
+            <div className="field">
+            <input onChange={this.props.getOtp} value={this.props.otpvalue}/>
             </div>
             <br/>
 
-        <div className="row justify-content-center">
         <Button size="sm" onClick={this.props.otpSubmit}>Submit OTP</Button>
+            </div>
+
         </div>
           </div>);
         }
@@ -101,14 +95,14 @@ class Otp extends React.Component{
 class AddCurrent extends React.Component{
   render(){
     return(<div className={this.props.class}>
-        <br/><br/>
-        <div className="row justify-content-center">
-        <h1>Add your Current Account details</h1>
-        </div>
+        <h1>Current Account</h1>
+        Add your current account details:
 
-            <div className="row justify-content-center">
-            <div className="col-2">Bank:</div>
-            <div className="col-3">
+        <div className="row justify-content-start debit">
+            <div className ='col-6'>
+
+            <div>Bank:</div>
+            <div className="field">
                 <select onChange={this.props.getCurrentBank} value={this.props.currentBank}>
                 <option>Choose a bank</option>
                 <option value='DBS/POSB'>DBS/POSB</option>
@@ -117,21 +111,18 @@ class AddCurrent extends React.Component{
                 <option value='CITIBANK'>Citibank</option>
                 </select>
             </div>
-            </div>
 
             <br/>
 
-             <div className="row justify-content-center">
-                <div className="col-2">Account number:</div>
-                <div className="col-3">
+                <div>Account number:</div>
+                <div className="field">
                 <input onChange={this.props.getCurrentNum} value={this.props.currentNum}/>
                 </div>
-            </div>
 
             <br/>
 
-            <div className="row justify-content-center">
             <Button size="sm" onClick={this.props.addCurrentAcc}>submit</Button>
+            </div>
             </div>
           </div>);
   }
@@ -142,32 +133,29 @@ class AddCurrent extends React.Component{
 class AddSavings extends React.Component{
   render(){
     return(<div className={this.props.class}>
-        <br/><br/>
-        <div className="row justify-content-center">
-        <h1>Add your Saving Account details</h1>
-        </div>
+        <h1>Saving Account</h1>
+        Add your saving account details:
 
-            <div className="row justify-content-center">
-                <div className="col-2">Bank:</div>
-                <div className="col-3">
+            <div className="row justify-content-start debit">
+                <div className ='col-6'>
+
+                <div>Bank:</div>
+                <div className="field">
                 <select>
                 <option value={this.props.savingBank}>{this.props.savingBank}</option>
                 </select>
                 </div>
-            </div>
 
             <br/>
-            <div className="row justify-content-center">
-                <div className="col-2">
+                <div>
                 Account number:
                 </div>
-                <div className="col-3">
+                <div className="field">
                 <input onChange={this.props.getSavingNum} value={this.props.savingNum}/>
                 </div>
-            </div>
             <br/>
-            <div className="row justify-content-center">
             <Button size="sm" onClick={this.props.addSavingAcc}>submit</Button>
+            </div>
             </div>
           </div>);
   }

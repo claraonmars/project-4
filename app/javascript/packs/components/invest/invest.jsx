@@ -431,12 +431,16 @@ class Invest extends React.Component{
                 return(<div>
                     <h1>Investments</h1>
                     We've helped you saved this month:
-                    <PieChart data={this.state.data} colors={["#20BBB2", "#07A0D6"]}/>
+                    <PieChart data={this.state.data} colors={["#20BBB2", "#8ED2CD", '#076F69']}/>
                     <br/>
                     Invest more?<br/>
+                    <div class="row justify-content-center">
+                    <div class='col-8'>
                     <Button rounded outline onClick={this.rounding}>Rounding</Button>
                     <Button rounded outline onClick={this.recurring}>Recurring</Button>
-                    <Button rounded outline onClick={this.oneoff}>One off</Button><br/><br/>
+                    <Button rounded outline onClick={this.oneoff}>One off</Button>
+                    </div>
+                    </div><br/><br/>
 
                     <div className="holder">
                     <Rounding

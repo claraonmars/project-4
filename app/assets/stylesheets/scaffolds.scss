@@ -49,6 +49,19 @@ div {
   color: green;
 }
 
+.field input{
+	width:100%;
+}
+
+.signin{
+	position:relative;
+	top:10vh;
+}
+
+.debit .col-6{
+	padding:0;
+}
+
 .field_with_errors {
   padding: 2px;
   background-color: red;
@@ -114,12 +127,13 @@ label {
 }
 
 .landing{
-	position:relative;
+	position:absolute;
 	background-image: url('https://res.cloudinary.com/dsfjnc10g/image/upload/v1543853531/landing.jpg');
 	background-size:cover;
 	width:100vw;
 	height:100vh;
 	background-repeat: no-repeat;
+	left:0;
 }
 
 .header_text{
@@ -127,8 +141,21 @@ label {
 	text-align:center;
 }
 
+li a{
+	margin: 0 10px;
+	color:white;
+}
+
 @media (min-width: 768px){
 	.container{
 	max-width:780px!important;
 	}
+}
+
+@media only screen and (max-device-width: 951px) {
+.header_text h1, h4{
+	font-size:1.5rem!important;
+}
+
+
 }

@@ -135,12 +135,41 @@ class Current extends React.Component{
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class Saving extends React.Component{
+    constructor(props){
+    super(props);
+    this.state={
+        newmonth: props.currentmonth,
+        pageNumbers: [],
+        newMonthArr:[],
+    }
+}
+
+    componentDidUpdate(prevProps) {
+
+      // Typical usage (don't forget to compare props):
+      if (this.props.currentmonth !== prevProps.currentmonth) {
+        this.setState({newmonth: this.props.currentmonth, pageNumbers:[], newMonthArr:[]})
+      }
+    }
+
     render(){
         const currentTodos = this.props.trans.reverse().slice(this.props.indexOfFirstTodo, this.props.indexOfLastTodo);
+        const newmonth = this.props.currentmonth
 
         //console.log('number',this.props.indexOfFirstTodo)
 
+
         const renderTodos = currentTodos.map((trans, i) => {
+
+            var split = String(trans.date)
+            split = split.split('');
+            split = split.slice(2, 4)
+            split = split.join('')
+
+            console.log(this.state.newmonth)
+
+            if(parseInt(split) === parseInt(this.state.newmonth)){
+
             return <ListGroupItem key={i} >
                 {trans.date}
 
@@ -165,14 +194,30 @@ class Saving extends React.Component{
                 </div>
             </div>
                 </ListGroupItem>;
+            }
         });
 
-        const pageNumbers = [];
-            for (let i = 1; i <= Math.ceil(this.props.trans.length / this.props.transPerPage); i++) {
-              pageNumbers.push(i);
+        // const pageNumbers = [];
+        //     for (let i = 1; i <= Math.ceil(this.props.trans.length / this.props.transPerPage); i++) {
+        //       pageNumbers.push(i);
+        // }
+
+        for (var i = 0; i < this.props.trans.length; i ++){
+                var month = String(this.props.trans[i].date);
+                month = month.split('');
+                month = month.slice(0,4);
+                month= month.join('');
+
+                if(parseInt(month) === parseInt('18' + this.state.newmonth)){
+                    [...this.state.newMonthArr].push(this.props.trans[i]);
+                }
+            }
+
+            for (let i = 1; i <= Math.ceil(this.state.newMonthArr.length / this.props.transPerPage); i++) {
+              [...this.state.pageNumbers].push(i);
         }
 
-        const renderPageNumbers = pageNumbers.map(number => {
+        const renderPageNumbers = this.state.pageNumbers.map(number => {
           return (
              <PageItem className="page-link"
               key={number}
@@ -186,6 +231,13 @@ class Saving extends React.Component{
         return(<div className={this.props.class}>
             You are currently viewing your SAVING ACCOUNT TRANSACTIONS <br/>
             <Button size="sm" onClick={this.props.switch}>View CURRENT ACCOUNT TRANSACTIONS</Button>
+
+            <select onChange={this.props.getMonth} value={this.props.currentmonth}>
+            <option>View previous months</option>
+            <option value='12'>December</option>
+            <option value='11'>November</option>
+            <option value='10'>October</option>
+            </select>
 
            <ListGroup>
             <ListGroupItem></ListGroupItem>
@@ -278,6 +330,7 @@ class Trans extends React.Component{
         this.setState({currentmonth: event.target.value});
     }
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //RENDER//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -311,7 +364,9 @@ class Trans extends React.Component{
                 transPerPage={this.state.transPerPage}
                 changePage={this.changePage}
                 indexOfLastTodo={indexOfLastTodo}
-                indexOfFirstTodo={indexOfFirstTodo}/>
+                indexOfFirstTodo={indexOfFirstTodo}
+                getMonth={this.getMonth}
+                currentmonth={this.state.currentmonth}/>
             </div>);
         }
 }
