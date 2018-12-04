@@ -7,9 +7,11 @@ Create an account and link it to a debit card, currents and savings account.
 
 * User goes through the process of authenicating their debit card with OTP.
 
+
 View all user transactions.
 
 Get a breakdown of your spendings and savings, and how much SaveMore has helped the user to save.
+
 
 SaveMore has 3 key savings plans — Rounding, Recurring and One-off: 
 
@@ -19,9 +21,12 @@ SaveMore has 3 key savings plans — Rounding, Recurring and One-off:
 
 * One-off investments is an easy way to make quick deposits into the savings account.
 
+
 Users can also make payment / transfer money to other accounts via the app.
-In desktop version, user has to input amount, payee and their account.
-In mobile version, user simply has to scan the QR code to make payments.
+
+* In desktop version, user has to input amount, payee and their account.
+
+* In mobile version, user simply has to scan the QR code to make payments.
 
 ## Technical Considerations
 -React on Rails
