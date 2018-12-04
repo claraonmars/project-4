@@ -28,6 +28,13 @@ It is currently in demo version purely to showcase its functionalities because b
 
 	* In mobile version, user simply has to scan the QR code to make payments.
 
+## Get started
+
+`git clone
+./bin/webpack-dev-server (in one CLI)
+rails s (in another CLI)`
+
+
 ## Technical Considerations
 * React on Rails, Webpack
 
