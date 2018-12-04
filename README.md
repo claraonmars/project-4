@@ -29,16 +29,16 @@ It is currently in demo version purely to showcase its functionalities because b
 	* In mobile version, user simply has to scan the QR code to make payments.
 
 ## Technical Considerations
--React on Rails
+* React on Rails, Webpack
 
--Javascript, Css
+* Javascript, Css
 
--Ajax, TextBelt API
+* Ajax, TextBelt API
 
--npm packages: MDBootstrap React, Chartkick, React-router, whatwg-fetch
+* npm packages: MDBootstrap React, Chartkick, React-router, whatwg-fetch
 
 ## Deliverables
-Working app is hosted at https://project4-savemore.herokuapp.com/
+Working app is hosted [here](https://project4-savemore.herokuapp.com/)
 
 ## Unresolved issues
 Chartkick runs an error when combining two LineCharts
