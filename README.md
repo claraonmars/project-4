@@ -4,16 +4,20 @@ It is currently in demo version purely to showcase its functionalities because b
 
 ## App functionalities
 Create an account and link it to a debit card, currents and savings account.
-User goes through the process of authenicating their debit card with OTP.
+
+* User goes through the process of authenicating their debit card with OTP.
 
 View all user transactions.
 
 Get a breakdown of your spendings and savings, and how much SaveMore has helped the user to save.
 
-SaveMore has 3 key savings plans — Rounding, Recurring and One-off.
-Rounding takes any transaction, rounds it off to the nearest whole number and puts the extra amount into the savings account.
-Recurring allows the user to set an amount that they want to recurr monthly.
-One-off investments is an easy way to make quick deposits into the savings account.
+SaveMore has 3 key savings plans — Rounding, Recurring and One-off: 
+
+* Rounding takes any transaction, rounds it off to the nearest whole number and puts the extra amount into the savings account.
+
+* Recurring allows the user to set an amount that they want to recurr monthly.
+
+* One-off investments is an easy way to make quick deposits into the savings account.
 
 Users can also make payment / transfer money to other accounts via the app.
 In desktop version, user has to input amount, payee and their account.
