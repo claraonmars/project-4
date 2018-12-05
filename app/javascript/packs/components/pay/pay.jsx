@@ -735,7 +735,7 @@ constructor(){
 
 renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to='/pay/success' />
+      return <Redirect to='/success' />
     }
   }
 
