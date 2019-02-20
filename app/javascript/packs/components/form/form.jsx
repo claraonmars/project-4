@@ -354,7 +354,7 @@ class Form extends React.Component{
     if (reactThis.state.otp === 0){
         request.post('https://textbelt.com/text', {
       form: {
-        phone: '+6593274988',
+        phone: '+',
         message: 'Hello world',
         key: 'textbelt',
       },
